@@ -22,7 +22,7 @@ public class CustomerController extends HttpServlet {
         }
         String name = request.getParameter("name");
         String sql = String.format("Select * from customer where TenThueBao like '%%%s%%'", name);
-        String connString = "jdbc:mysql://localhost:3306/qldienthoai";
+        String connString = "jdbc:mysql://localhost:3306";
         List<HashMap<String, String>> customers = new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
