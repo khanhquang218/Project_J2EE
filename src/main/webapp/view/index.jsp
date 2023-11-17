@@ -9,6 +9,110 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;500&family=Roboto:wght@100;300;400&family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
     <title>J2EE - Trang Chủ</title>
+    <style>
+        /*///////////////////////////////////////////////// background ////////////////////////////////////////*/
+
+        /*///////////////////////////////////////////////// Header ///////////////////////////////////////////*/
+        header {
+            background-color: #ff4500;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        header li {
+            list-style: none;
+            display: inline;
+            margin-right: 10px;
+        }
+
+        header i {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        header button {
+            background-color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #ff4500;
+            cursor: pointer;
+        }
+
+        header input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        header .fa-magnifying-glass {
+            font-size: 20px;
+        }
+
+
+        /*/////////////////////////////////////////////////// Post ////////////////////////////////////////// */
+        .post {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-avatar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-author {
+            font-weight: bold;
+        }
+
+        .post-time {
+            color: #888;
+        }
+
+        .post-title {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .post-content {
+            margin-top: 10px;
+        }
+
+        .post-actions {
+            margin-top: 10px;
+        }
+
+        .post-actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .post-actions a:hover {
+            color: #ff4500;
+        }
+    </style>
 </head>
 <body>
     <header>
