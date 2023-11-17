@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@WebServlet("/posts")
+@WebServlet({"/posts"})
 public class PostController extends HttpServlet {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/j2ee";
     private static final String JDBC_USER = "root";
