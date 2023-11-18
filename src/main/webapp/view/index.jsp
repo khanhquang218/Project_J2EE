@@ -1,3 +1,4 @@
+<%@ page import="model.PostRequestModel" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +55,7 @@
         <div class="post-title">Tiêu đề bài viết cụ thể</div>
         <div class="post-content">
             Nội dung bài viết cụ thể nằm ở đây. Đây có thể là một đoạn văn bản dài hoặc liên kết đến nội dung chi tiết hơn.
+
         </div>
         <div class="post-actions">
             <a href="#" class="post-like">Thích</a>
