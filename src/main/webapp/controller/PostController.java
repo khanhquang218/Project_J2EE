@@ -24,6 +24,9 @@ public class PostController extends HttpServlet {
         if (uri.contains("/")){
             processDoGet(request,response);
         }
+        if (uri.contains("/createpost")){
+            proccessDoPost(request,response);
+        }
     }
     protected void processDoGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String query = "SELECT * FROM post";
@@ -52,5 +55,36 @@ public class PostController extends HttpServlet {
             throw new RuntimeException(e);
         }
         request.getRequestDispatcher("/view/testData.jsp").forward(request,response);
+    }
+    protected void proccessDoPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        String PostID = request.getParameter("PostID");
+        String UserID = request.getParameter("UserID");
+        String Image = request.getParameter("Image");
+        String Content = request.getParameter("Content");
+        String DatePost = request.getParameter("DatePost");
+        String Modifed = request.getParameter("Modifed");
+        String LastModifedTime = request.getParameter("LastModifedTime");
+        String query = "INSERT INTO post(PostID, UserID, Image, Content, DatePost, Modifed, LastModifedTime) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        if (UserID != null && Content != null){
+            try (Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+                preparedStatement.setString(1, PostID);
+                preparedStatement.setString(2, UserID);
+                preparedStatement.setString(3, Image);
+                preparedStatement.setString(4, Content);
+                preparedStatement.setString(5, DatePost);
+                preparedStatement.setString(6, Modifed);
+                preparedStatement.setString(7, LastModifedTime);
+
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            response.sendRedirect(request.getContextPath()+ "/posts");
+        }
     }
 }
