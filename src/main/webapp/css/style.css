@@ -1,6 +1,6 @@
-/*///////////////////////////////////////////////// background ////////////////////////////////////////*/
 
 /*///////////////////////////////////////////////// Header ///////////////////////////////////////////*/
+/* Kiểu dáng cho phần header */
 header {
     background-color: #ff4500;
     color: #fff;
@@ -15,6 +15,7 @@ header li {
     margin-right: 10px;
 }
 
+/* Kiểu dáng cho các biểu tượng và nút */
 header i {
     font-size: 20px;
     margin-right: 5px;
@@ -34,18 +35,21 @@ header button {
     cursor: pointer;
 }
 
+/* Kiểu dáng cho ô tìm kiếm */
 header input[type="text"] {
     padding: 5px;
     border: none;
     border-radius: 5px;
 }
 
+/* Kiểu dáng cho nút tìm kiếm */
 header .fa-magnifying-glass {
     font-size: 20px;
 }
 
 
 /*/////////////////////////////////////////////////// Post ////////////////////////////////////////// */
+/* Kiểu dáng cho phần bài viết */
 .post {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -53,6 +57,7 @@ header .fa-magnifying-glass {
     padding: 10px;
 }
 
+/* Phần header của bài viết */
 .post-header {
     display: flex;
     align-items: center;
@@ -78,6 +83,7 @@ header .fa-magnifying-glass {
     color: #888;
 }
 
+/* Tiêu đề và nội dung của bài viết */
 .post-title {
     font-size: 24px;
     margin-top: 10px;
@@ -87,6 +93,7 @@ header .fa-magnifying-glass {
     margin-top: 10px;
 }
 
+/* Phần tương tác */
 .post-actions {
     margin-top: 10px;
 }
