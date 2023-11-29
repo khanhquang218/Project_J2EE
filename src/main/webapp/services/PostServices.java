@@ -144,7 +144,60 @@ public class PostServices  {
         System.out.println(postModel.PostID);
         return postModel;
     }
-//    public PostModel EditPostModel(String PostID){
-//        var ResultOfFetch =
-//    }
+
+    //kiểm tra bài viết có tồn tại hay không.
+    public  boolean CheckPostIsExists(String PostID){
+        String query = String.format("select  * from post where PostID = %s ",PostID);
+        try{
+            CheckDrive();
+            Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet != null){
+                return true;
+            }
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return false;
+    }
+    //kiểm tra dữ liệu cũ có tồn tại hay không
+    //lấy dữ liệu từ bài viết cũ
+    //lấy dữ liệu đầu vào cần thay đổi
+    //danh sách dữ liệu có thể tay đổi:
+    //  nội dung bài viết, hình ảnh.
+    public boolean EditPostModel(String PostID, String newContent, String newImages){
+        String query = String.format("update post set Image = %s, Content = %s where PostID = %s ",newImages,newContent, PostID);
+        var ResultOfCheck = CheckPostIsExists(PostID);
+        if(ResultOfCheck == true){
+            try{
+                connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1,newImages);
+                preparedStatement.setString(2,newContent);
+                preparedStatement.executeUpdate();
+                return true;
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+        }
+        return false;
+    }
+    //kiểm tra dữ liệu có tồn tại hay không
+    //tiến hành xóa dữ liệu và trả lại kết quả tiến trình
+    public boolean DeletePostModel(String PostID){
+        String query = String.format("delete * from post where PostID = %s",PostID);
+        try {
+            connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return false;
+    }
 }
