@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.time.LocalDate;
 
 @WebServlet({"/"})
 public class PostController extends HttpServlet {
@@ -28,9 +28,10 @@ public class PostController extends HttpServlet {
 //        req.setAttribute("postList", postModelList);
 //        req.getRequestDispatcher("/view/home.jsp");
 //        Test GetPostOfFriend
-        PostModel postModel = postServices.CreateNewPost();
-        req.setAttribute("postList", postModel);
-        req.getRequestDispatcher("/view/home.jsp");
+
+        PostModel newPost = new PostModel("2", "1", "a", "a", LocalDate.now(), LocalDate.now(), LocalDate.now());
+        postServices.CreateNewPost(newPost);
+
 //        Test CraeteNewPost
     }
 }
