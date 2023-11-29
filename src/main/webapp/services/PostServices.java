@@ -52,18 +52,46 @@ public class PostServices  {
 
         return postModelList;
     }
-    //tìm người dùng
+    //lấy id người dùng khác trong danh sách bạn bè và xác thực có tồn tại hay không
     //truy cập lấy thông tim toàn bộ bài post hiển thị
     //đưa về 1 danh sách
     //trộn hoặc sắp xếp theo nhu cầu
-    public List<PostModel> PostOfFriend(String UserID){
+    public List<PostModel> GetPostOfFriend(String UserID){
+        String query = String.format("select  * from post where UserID = %s ",UserID);
         List<PostModel> postModelList = new ArrayList<>();
-        return postModelList;
+        UserService userService = new UserService();
+        var ResultOfCheckUser = userService.CheckUser(UserID);
+        if(ResultOfCheckUser == true){
+            try{
+                CheckDrive();
+                connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getString("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    System.out.println("PostID: " + resultSet.getString("PostID"));
+                    System.out.println("UserID: " + resultSet.getString("UserID"));
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+        }
+        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
     }
     //tạo 1 bài post mới
     //trả về khi true
     //false khi không thành công
-    public boolean CreatePost(PostModel newPost){
+    public boolean CreateNewPost(PostModel newPost){
         String query = "INSERT INTO post(PostID, UserID, Image, Content, DatePost, Modifed, LastModifedTime) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try{
@@ -85,4 +113,38 @@ public class PostServices  {
         }
         return true ;
     }
+    public PostModel FecthPostModel(String PostID){
+        String query = String.format("select * from post where PostID = %s",PostID);
+        PostModel postModel = new PostModel(null,null,null,null,null, null,
+                null);
+        try{
+            CheckDrive();
+            connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                PostModel post = new PostModel(
+                        resultSet.getString("PostID"),
+                        resultSet.getString("UserID"),
+                        resultSet.getString("Image"),
+                        resultSet.getString("Content"),
+                        resultSet.getDate("DatePost").toLocalDate(),
+                        resultSet.getDate("Modifed").toLocalDate(),
+                        resultSet.getDate("LastModifedTime").toLocalDate()
+                );
+//                System.out.println("PostID: " + resultSet.getString("PostID"));
+//                System.out.println("UserID: " + resultSet.getString("UserID"));
+                postModel = post;
+            }
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+//        return postModel;
+        System.out.println(postModel.PostID);
+        return postModel;
+    }
+//    public PostModel EditPostModel(String PostID){
+//        var ResultOfFetch =
+//    }
 }
