@@ -16,14 +16,21 @@ public class PostController extends HttpServlet {
     private final PostServices postServices = new PostServices();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<PostModel> postModelList = postServices.GetAllPosts();
-        req.setAttribute("postList", postModelList);
-        req.getRequestDispatcher("/view/home.jsp");
+//        List<PostModel> postModelList = postServices.GetAllPosts();
+//        req.setAttribute("postList", postModelList);
+//        req.getRequestDispatcher("/view/home.jsp");
 //        Test GetAllPosts
 //        PostModel postModel = postServices.FecthPostModel("1");
 //        req.setAttribute("postList", postModel);
 //        req.getRequestDispatcher("/view/home.jsp");
 //        Test FecthPostModel
-
+//        List<PostModel> postModelList = postServices.GetPostOfFriend("1");
+//        req.setAttribute("postList", postModelList);
+//        req.getRequestDispatcher("/view/home.jsp");
+//        Test GetPostOfFriend
+        PostModel postModel = postServices.CreateNewPost();
+        req.setAttribute("postList", postModel);
+        req.getRequestDispatcher("/view/home.jsp");
+//        Test CraeteNewPost
     }
 }
