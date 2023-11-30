@@ -72,5 +72,34 @@ public class CommentService {
         }
         return true ;
     }
-//    public boolean
+
+    public  boolean IsCheckCommentExist(String CommentID){
+        String query = String.format("select * from comment where CommentID = %s",CommentID);
+        try {
+            CheckDrive();
+            Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet != null )
+                return true;
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return false;
+    }
+    public boolean DeleteComment(String CommentID){
+        String query = String.format("delete * from post where PostID = %s",CommentID);
+        try {
+            CheckDrive();
+            Connection connection  = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return false;
+    }
 }

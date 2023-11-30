@@ -214,6 +214,7 @@ public class PostServices  {
         var ResultOfCheck = CheckPostIsExists(PostID);
         if(ResultOfCheck == true){
             try{
+                CheckDrive();
                 connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1,newImages);
@@ -232,6 +233,7 @@ public class PostServices  {
     public boolean DeletePostModel(String PostID){
         String query = String.format("delete * from post where PostID = %s",PostID);
         try {
+            CheckDrive();
             connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
