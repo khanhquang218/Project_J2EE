@@ -15,7 +15,7 @@ public class FriendshipModel {
         this.UserID1 = UserID1;
         this.UserID2 = UserID2;
         this.RequestDate = RequestDate;
-        this.ApproveDate = approveDate;
+        this.ApproveDate = ApproveDate;
         this.DeniedDate = DeniedDate;
     }
 
@@ -52,11 +52,11 @@ public class FriendshipModel {
     }
 
     public LocalDate approveDate() {
-        return approveDate;
+        return ApproveDate;
     }
 
     public void approveDate(LocalDate approveDate) {
-        this.approveDate = approveDate;
+        this.ApproveDate = approveDate;
     }
 
     public LocalDate DeniedDate() {

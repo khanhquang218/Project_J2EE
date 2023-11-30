@@ -5,7 +5,13 @@ import models.UserModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+*   kiểm tra drive
+* lấy thông tin toàn bộ người dùng
+* tìm kiếm người dùng theo Id
+* tìm kiếm người dùng theo tên
+* kiểm tra id người dùng có tồn tại hay không
+*/
 public class UserService {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/j2ee";
     private static final String JDBC_USER = "root";
@@ -50,7 +56,7 @@ public class UserService {
         }
         return userModelList;
     }
-    public UserModel FetchUserModel(String UserID){
+    public UserModel FetchUserModelByUserID(String UserID){
         String query = String.format("select  * from person where UserID = %s ",UserID);
         UserModel userResult = new UserModel(null, null, null, null, null,
                 null, null, null, null, null);
@@ -78,6 +84,34 @@ public class UserService {
             exception.printStackTrace();
         }
         return userResult;
+    }
+    public  List<UserModel> FetchUserModelByUserName(String UserName){
+        List<UserModel> userModelList = new ArrayList<>();
+        String query = String.format("select * from person where UserName = %s", UserName);
+        try {
+            CheckDrive();
+            Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            Statement statement =connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                UserModel userModel = new UserModel(
+                        resultSet.getString("UserID"),
+                        resultSet.getString("FirstName"),
+                        resultSet.getString("LastName"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("UserAccount"),
+                        resultSet.getDate("DayOfBirth").toLocalDate(),
+                        resultSet.getString("Gender"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Images")
+                );
+                userModelList.add(userModel);
+            }
+        }catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return  userModelList;
     }
     public boolean CheckUser(String UserID){
         String query = String.format("select  * from person where UserID = %s ",UserID);

@@ -1,5 +1,6 @@
 package models;
 
+
 import java.time.LocalDate;
 
 public class CommentModel {
@@ -10,12 +11,12 @@ public class CommentModel {
     public String UserID;
     public LocalDate CreateDate;
     public CommentModel(String CommentID, String Content, String PostID, String ReplyTo,String UserID, LocalDate CreateDate){
-        this.CommentID = commentID;
-        this.Content = content;
-        this.PostID = postID;
-        this.ReplyTo = replyTo
-        this.UserID = userID;
-        this.CreateDate = createDate;
+        this.CommentID = CommentID;
+        this.Content = Content;
+        this.PostID = PostID;
+        this.ReplyTo = ReplyTo;
+        this.UserID = UserID;
+        this.CreateDate = CreateDate;
     }
 
     public String getCommentID() {

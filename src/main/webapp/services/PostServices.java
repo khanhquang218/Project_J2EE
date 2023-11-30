@@ -1,11 +1,22 @@
 package services;
 
 import models.PostModel;
+import models.UserModel;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* lấy toàn bộ bài viết
+* lấy bài viết theo id người dùng cung cấp
+* lấy bài viết theo tên người dùng cung cấp (user name có thể sẽ trùng hoặc không nên sẽ giải quyết ở định dạng danh sách)
+* tìm kiếm tạo bài viết
+* xóa bài viết
+* chỉnh sửa bài viết cập nhật tại thời gian chỉnh sửa lần cuối
+* kiểm tra id bài viết đã từng tồn tại hay chưa
+* kiểm tra drive
+* */
 public class PostServices  {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/j2ee";
     private static final String JDBC_USER = "root";
@@ -56,7 +67,7 @@ public class PostServices  {
     //truy cập lấy thông tim toàn bộ bài post hiển thị
     //đưa về 1 danh sách
     //trộn hoặc sắp xếp theo nhu cầu
-    public List<PostModel> GetPostOfFriend(String UserID){
+    public List<PostModel> GetPostOfFriendByUserID(String UserID){
         String query = String.format("select  * from post where UserID = %s ",UserID);
         List<PostModel> postModelList = new ArrayList<>();
         UserService userService = new UserService();
@@ -88,9 +99,40 @@ public class PostServices  {
         }
         return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
     }
+    public  List<PostModel> GetListPostByUserNameOfUser(String UserName){
+        UserService userService = new UserService();
+        List<UserModel> userModelList = userService.FetchUserModelByUserName(UserName);
+        List<PostModel> postModelList = new ArrayList<>();
+
+        try{
+            connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            for (var element : userModelList){
+                String query = String.format("select * from post where UserId = %s",element.UserID);
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    PostModel post = new PostModel(
+                            resultSet.getString("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    postModelList.add(post);
+                }
+            }
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return postModelList;
+    }
     //tạo 1 bài post mới
     //trả về khi true
     //false khi không thành công
+    //
     public boolean CreateNewPost(PostModel newPost){
         String query = "INSERT INTO post(PostID, UserID, Image, Content, DatePost, Modifed, LastModifedTime) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
