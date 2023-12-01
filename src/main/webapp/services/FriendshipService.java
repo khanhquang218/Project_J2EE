@@ -10,10 +10,21 @@ public class FriendshipService {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/j2ee";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "123456";
+    private static void CheckDrive(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch (ClassCastException exception){
+            exception.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public boolean CreateRelationship (FriendshipModel newRelationShip){
         String query =  String.format("insert into friendship(FriendshipID, UserID1, UserID2, RequestDate, ApproveDate,DeniedDate) " +
                 "value (?,?,?,?,?,?)");
         try {
+            CheckDrive();
             Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,newRelationShip.FriendshipID);
@@ -32,7 +43,9 @@ public class FriendshipService {
     }
     public boolean DeleteRelationship(String FriendshipID){
         String query = String.format("delete * from post where FriendshipID = %s",FriendshipID);
+
         try {
+            CheckDrive();
             Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
@@ -47,6 +60,7 @@ public class FriendshipService {
         String query = "select * from friendship";
         List<FriendshipModel> friendshipModelList = new ArrayList<>();
         try {
+            CheckDrive();
             Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
