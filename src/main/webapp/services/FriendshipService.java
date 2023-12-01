@@ -30,6 +30,19 @@ public class FriendshipService {
         }
         return false;
     }
+    public boolean DeleteRelationship(String FriendshipID){
+        String query = String.format("delete * from post where FriendshipID = %s",FriendshipID);
+        try {
+            Connection connection = DriverManager.getConnection(JDBC_URL,JDBC_USER,JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return false;
+    }
     public List<FriendshipModel> GetAllRelationship(){
         String query = "select * from friendship";
         List<FriendshipModel> friendshipModelList = new ArrayList<>();
