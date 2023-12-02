@@ -10,7 +10,7 @@ public class ImageListModel {
     public ImageListModel(int imageListID, String imageID, int PostID) {
         this.imageListID = imageListID;
         this.imageID = imageID;
-        this.PostID = postID;
+        this.PostID = PostID;
     }
 
     public int getImageListID() {
