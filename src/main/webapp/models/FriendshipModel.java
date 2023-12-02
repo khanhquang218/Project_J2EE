@@ -6,17 +6,14 @@ public class FriendshipModel {
     public String FriendshipID;
     public String UserID1;
     public String UserID2;
-    public LocalDate RequestDate;
-    public LocalDate ApproveDate;
-    public LocalDate DeniedDate;
-    
-    public FriendshipModel(String FriendshipID, String UserID1, String UserID2, LocalDate RequestDate, LocalDate ApproveDate, LocalDate DeniedDate){
+    public LocalDate AcceptDate;
+    public boolean Friend;
+    public FriendshipModel(String FriendshipID, String UserID1, String UserID2, LocalDate AcceptDate, boolean Friend){
         this.FriendshipID = FriendshipID;
         this.UserID1 = UserID1;
         this.UserID2 = UserID2;
-        this.RequestDate = RequestDate;
-        this.ApproveDate = ApproveDate;
-        this.DeniedDate = DeniedDate;
+        this.AcceptDate = AcceptDate;
+        this.Friend = Friend;
     }
 
     public String getFriendship() {
@@ -24,7 +21,7 @@ public class FriendshipModel {
     }
 
     public void setFriendship(String friendship) {
-        this.FriendshipID = friendship;
+        this.FriendshipID = FriendshipID;
     }
 
     public String getUserID1() {
@@ -43,27 +40,15 @@ public class FriendshipModel {
         this.UserID2 = UserID2;
     }
 
-    public LocalDate RequestDate() {
-        return RequestDate;
+    public LocalDate getAcceptDate() {
+        return AcceptDate;
     }
 
-    public void RequestDate(LocalDate RequestDate) {
-        this.RequestDate = RequestDate;
+    public void setAcceptDate(LocalDate AcceptDate) {
+        this.AcceptDate = AcceptDate;
     }
 
-    public LocalDate approveDate() {
-        return ApproveDate;
-    }
+    public boolean getFriend(){ return Friend;}
 
-    public void approveDate(LocalDate approveDate) {
-        this.ApproveDate = approveDate;
-    }
-
-    public LocalDate DeniedDate() {
-        return DeniedDate;
-    }
-
-    public void DeniedDate(LocalDate DeniedDate) {
-        this.DeniedDate = DeniedDate;
-    }
+    public void setFriend(Boolean Friend) {this.Friend = Friend;}
 }

@@ -4,26 +4,29 @@ package models;
 import java.time.LocalDate;
 
 public class CommentModel {
-    public String CommentID;
+    public int CommentID;
     public String Content;
-    public String PostID;
-    public String ReplyTo;
+    public int ParentID;
+    public int PostID;
     public String UserID;
     public LocalDate CreateDate;
-    public CommentModel(String CommentID, String Content, String PostID, String ReplyTo,String UserID, LocalDate CreateDate){
+    public int Levels;
+    public CommentModel(int CommentID, String Content, int ParentID, int PostID,String UserID,
+                        LocalDate CreateDate, int Levels){
         this.CommentID = CommentID;
         this.Content = Content;
+        this.ParentID = ParentID;
         this.PostID = PostID;
-        this.ReplyTo = ReplyTo;
         this.UserID = UserID;
         this.CreateDate = CreateDate;
+        this.Levels = Levels;
     }
 
-    public String getCommentID() {
+    public int getCommentID() {
         return CommentID;
     }
 
-    public void setCommentID(String CommentID) {
+    public void setCommentID(Integer CommentID) {
         this.CommentID = CommentID;
     }
 
@@ -35,20 +38,16 @@ public class CommentModel {
         this.Content = Content;
     }
 
-    public String getPostID() {
+    public int getParentID() { return ParentID;}
+
+    public void setParentID(int ParentID) { this.ParentID = ParentID;}
+
+    public int getPostID() {
         return PostID;
     }
 
-    public void setPostID(String PostID) {
+    public void setPostID(int PostID) {
         this.PostID = PostID;
-    }
-
-    public String getReplyTo() {
-        return ReplyTo;
-    }
-
-    public void setReplyTo(String ReplyTo) {
-        this.ReplyTo = ReplyTo;
     }
 
     public String getUserID() {
@@ -65,5 +64,13 @@ public class CommentModel {
 
     public void CreateDate(LocalDate CreateDate) {
         this.CreateDate = CreateDate;
+    }
+
+    public int getLevels() {
+        return Levels;
+    }
+
+    public void setLevels(int Levels) {
+        this.Levels = Levels;
     }
 }
