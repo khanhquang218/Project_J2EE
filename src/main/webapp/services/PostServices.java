@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class PostServices {
     private static final Configura configura = new Configura();
-
+    private static final UserServices userService = new UserServices();
     //lấy toàn bộ bài post hiện có trong database
     public List<PostModel> GetAllPosts(){
         List<PostModel> postModelList = new ArrayList<>();
@@ -50,6 +50,103 @@ public class PostServices {
             exception.printStackTrace();
         }
         return postModelList;
+    }
+    //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
+    public List<PostModel> GetPostOfFriendByUserID(String UserID){
+        String query = String.format("select  * from post where UserID = %s ",UserID);
+        List<PostModel> postModelList = new ArrayList<>();
+        var ResultOfCheckUser = userService.CheckUserIsExists(UserID);
+        if(ResultOfCheckUser == true){
+            try{
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getString("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    System.out.println("PostID: " + resultSet.getString("PostID"));
+                    System.out.println("UserID: " + resultSet.getString("UserID"));
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+        }
+        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
+    }
+    //tìm kiếm post theo UserName
+    public List<PostModel> GetPostsByUserName(String UserName){
+        List<PostModel> postModelList = new ArrayList<>();
+        var resultOfCheck = userService.CheckUserNameExists(UserName);
+        if(resultOfCheck){
+            var userModelList = userService.FetchUserModelByUserName(UserName);
+            try {
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER, configura.JDBC_PASSWORD);
+                for (var element : userModelList) {
+                    String query = String.format("select * from post where UserId = %s", element.UserID);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery(query);
+                    while (resultSet.next()) {
+                        PostModel post = new PostModel(
+                                resultSet.getString("PostID"),
+                                resultSet.getString("UserID"),
+                                resultSet.getString("Image"),
+                                resultSet.getString("Content"),
+                                resultSet.getDate("DatePost").toLocalDate(),
+                                resultSet.getDate("Modifed").toLocalDate(),
+                                resultSet.getDate("LastModifedTime").toLocalDate()
+                        );
+                        postModelList.add(post);
+                    }
+                }
+            }
+            catch (SQLException sqlException){
+                sqlException.printStackTrace();
+            }
+            return postModelList;
+        }
+        return null;
+    }
+    //trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
+    public List<PostModel> GetPostOfUserByDate(String UserId, LocalDate StartDay){
+        var ResultOfCheckUser = userService.CheckUserIsExists(UserId);
+        String query = "select * from post where UserID = '"+ UserId+"',LastModifedTime = '"+ StartDay+"'";
+        List<PostModel> postModelList = new ArrayList<>();
+        if(ResultOfCheckUser == true){
+            try{
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getString("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    System.out.println("PostID: " + resultSet.getString("PostID"));
+                    System.out.println("UserID: " + resultSet.getString("UserID"));
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+        }
+        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
     }
 
     //kiểm tra bài post đã tồn tại hay chưa
