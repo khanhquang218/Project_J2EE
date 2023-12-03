@@ -12,9 +12,9 @@ public class UserModel {
     public LocalDate DayOfBirth;
     public String Gender;
     public String Address;
-    public String Images;
+//    public String Images;
     public UserModel(String userID, String firstName, String lastName, String email,
-                     String phone, String userAccount, LocalDate dayOfBirth, String gender, String address, String images){
+                     String phone, String userAccount, LocalDate dayOfBirth, String gender, String address){
         this.UserID = userID;
         this.FirstName = firstName;
         this.LastName = lastName;
@@ -24,7 +24,7 @@ public class UserModel {
         this.DayOfBirth = dayOfBirth;
         this.Gender = gender;
         this.Address = address;
-        this.Images = images;
+
     }
 
     public String getUserID() {
@@ -63,9 +63,9 @@ public class UserModel {
         return Address;
     }
 
-    public String getImages() {
-        return Images;
-    }
+//    public String getImages() {
+//        return Images;
+//    }
 
     public void setAddress(String address) {
         Address = address;
@@ -87,9 +87,9 @@ public class UserModel {
         Gender = gender;
     }
 
-    public void setImages(String images) {
-        Images = images;
-    }
+//    public void setImages(String images) {
+//        Images = images;
+//    }
 
     public void setLastName(String lastName) {
         LastName = lastName;
