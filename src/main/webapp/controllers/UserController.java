@@ -13,17 +13,23 @@ import java.util.List;
 
 @WebServlet({"/user"})
 public class UserController extends HttpServlet {
-    private final UserServices userServices = new UserServices();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        Test GetAllUser
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+            IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        UserServices userServices = new UserServices();
         List<UserModel> userModelList = userServices.GetAllUsers();
-        req.setAttribute("userList", userModelList);
-        req.getRequestDispatcher("/view/home.jsp");
-//        Test FetchUserModelByUserID
-        UserModel userModel = userServices.FetchUserModelByUserID("1");
-        req.setAttribute("userList", userModel);
-        req.getRequestDispatcher("/view/home.jsp");
-//        Test FecthUserName
+        request.setAttribute("userModelList", userModelList);
+        request.getRequestDispatcher("/view/home.jsp").forward(request,response);
     }
 }
