@@ -65,4 +65,24 @@ public class FriendshipService {
         }
         return null;
     }
+    public boolean DeleteARelationship (String UserID1, String UserID2){
+        UserServices userServices = new UserServices();
+        var resultOfCheck1 = userServices.CheckUserIsExists(UserID1);
+        var resultOfCheck2 = userServices.CheckUserIsExists(UserID2);
+        String query = String.format("delete * from friendship where PostID1 = %s, PostID2 = %s", UserID1, UserID2);
+        if(resultOfCheck2 == true || resultOfCheck1 == true){
+            try{
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.executeUpdate();
+                return true;
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+            return false;
+        }
+        return false;
+    }
 }
