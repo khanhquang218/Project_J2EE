@@ -20,7 +20,7 @@ public class PostController extends HttpServlet {
         req.setAttribute("postList", postModelList);
         req.getRequestDispatcher("/view/home.jsp");
 //        Test GetAllPosts
-//        List<PostModel> postModelList = postServices.GetAllPosts();
+//        List<PostModel> postModelList = postServices.GetPostOfFriendByUserID("1");
 //        req.setAttribute("postList", postModelList);
 //        req.getRequestDispatcher("/view/home.jsp");
 //        Test FecthPostModel

@@ -26,7 +26,7 @@ public class FriendshipService {
                 preparedStatement.setString(1, newFriendship.FriendshipID);
                 preparedStatement.setString(2,newFriendship.UserID1);
                 preparedStatement.setBoolean(3,newFriendship.Friend);
-                preparedStatement.setString(4,String.valueOf(newFriendship.AcceptDate);
+                preparedStatement.setString(4,String.valueOf(newFriendship.AcceptDate));
                 preparedStatement.executeUpdate();
                 return true;
             }
