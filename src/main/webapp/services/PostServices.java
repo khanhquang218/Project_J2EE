@@ -150,7 +150,7 @@ public class PostServices {
     }
 
     //kiểm tra bài post đã tồn tại hay chưa
-    public boolean CheckPostIsExists(String PostID) {
+    public boolean CheckPostIsExists(int PostID) {
         String query = String.format("select  * from post where PostID = %s ", PostID);
         try{
             Configura.CheckDrive();
@@ -192,7 +192,7 @@ public class PostServices {
     }
     //xóa một bài post cũ
 
-    public boolean DeletePostModel(String PostID) {
+    public boolean DeletePostModel(int PostID) {
         String query = String.format("delete * from post where PostID = %s", PostID);
         var resultOfCheck = CheckPostIsExists(PostID);
         if (resultOfCheck) {
@@ -212,7 +212,7 @@ public class PostServices {
     //cập nhật một bài post sẵn có
     //cập nhật nội dung, hình ảnh, và thời gian truy cập lần cuối
 
-    public boolean EditPostModel(String PostID, String newContent, String newImages, LocalDate newLastModifedTime) {
+    public boolean EditPostModel(int PostID, String newContent, String newImages, LocalDate newLastModifedTime) {
         String query = String.format("update post set Image = %s, Content = %s, LastModifedTime = %s where PostID = %s ", newImages, newContent,newLastModifedTime, PostID);
         var ResultOfCheck = CheckPostIsExists(PostID);
         if (ResultOfCheck) {
