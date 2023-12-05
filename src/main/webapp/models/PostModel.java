@@ -3,14 +3,14 @@ package models;
 import java.time.LocalDate;
 
 public class PostModel {
-    public String PostID;
+    public int PostID;
     public String UserID;
     public String Image;
     public String Content;
     public LocalDate DatePost;
     public LocalDate Modifed;
     public LocalDate LastModifedTime;
-    public PostModel(String postID, String userID, String image, String content,
+    public PostModel(int postID, String userID, String image, String content,
                      LocalDate datePost, LocalDate modifed, LocalDate lastModifedTime){
         this.PostID = postID;
         this.DatePost = datePost;
@@ -20,7 +20,7 @@ public class PostModel {
         this.LastModifedTime = lastModifedTime;
         this.UserID = userID;
     }
-    public String getPostID(){
+    public int getPostID(){
         return this.PostID;
     }
     public String getUserID(){
@@ -41,7 +41,7 @@ public class PostModel {
     public LocalDate getLastModifiedTime(){
         return  this.LastModifedTime;
     }
-    public void setPostID(String PostID){
+    public void setPostID(int PostID){
         this.PostID = PostID;
     }
     public void setUserID(String UserID){
