@@ -47,7 +47,7 @@ public class InteractServices {
                 while (resultSet.next()){
                     InteractModel interactModel = new InteractModel(
                             resultSet.getString("InteractID"),
-                            resultSet.getInt("ParemtID"),
+                            resultSet.getInt("ParentID"),
                             resultSet.getString("UserID")
                     );
                     interactModelList.add(interactModel);
