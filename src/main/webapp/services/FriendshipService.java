@@ -1,11 +1,7 @@
 package services;
 
-import jdk.dynalink.linker.LinkerServices;
 import models.FriendshipModel;
 
-import javax.print.attribute.standard.RequestingUserName;
-import javax.xml.registry.infomodel.User;
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
