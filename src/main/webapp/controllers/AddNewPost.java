@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(value = {"/"},name = "home")
+@WebServlet(value = {"/posts/create"})
 public class AddNewPost extends HttpServlet {
     private PostServices postServices = new PostServices();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doPost(req, resp);
-        PostModel newPost = new PostModel(1,"1", "image",
+        PostModel newPost = new PostModel(2,"1", "image",
                 "demo code create of posts", LocalDate.now(),LocalDate.now(), LocalDate.now());
         var resultOfCreatePost = postServices.CreateNewPost(newPost);
         System.out.println(resultOfCreatePost);
