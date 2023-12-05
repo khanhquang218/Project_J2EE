@@ -52,7 +52,7 @@ public class PostServices {
         return postModelList;
     }
     //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
-    public List<PostModel> GetPostOfFriendByUserID(String UserID){
+    public List<PostModel> GetPostOfUserID(String UserID){
         String query = String.format("select  * from post where UserID = %s ",UserID);
         List<PostModel> postModelList = new ArrayList<>();
         var ResultOfCheckUser = userService.CheckUserIsExists(UserID);
