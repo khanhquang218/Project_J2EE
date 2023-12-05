@@ -33,7 +33,7 @@ public class PostServices {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 PostModel post = new PostModel(
-                        resultSet.getString("PostID"),
+                        resultSet.getInt("PostID"),
                         resultSet.getString("UserID"),
                         resultSet.getString("Image"),
                         resultSet.getString("Content"),
@@ -64,7 +64,7 @@ public class PostServices {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     PostModel post = new PostModel(
-                            resultSet.getString("PostID"),
+                            resultSet.getInt("PostID"),
                             resultSet.getString("UserID"),
                             resultSet.getString("Image"),
                             resultSet.getString("Content"),
@@ -97,7 +97,7 @@ public class PostServices {
                     ResultSet resultSet = statement.executeQuery(query);
                     while (resultSet.next()) {
                         PostModel post = new PostModel(
-                                resultSet.getString("PostID"),
+                                resultSet.getInt("PostID"),
                                 resultSet.getString("UserID"),
                                 resultSet.getString("Image"),
                                 resultSet.getString("Content"),
@@ -129,7 +129,7 @@ public class PostServices {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     PostModel post = new PostModel(
-                            resultSet.getString("PostID"),
+                            resultSet.getInt("PostID"),
                             resultSet.getString("UserID"),
                             resultSet.getString("Image"),
                             resultSet.getString("Content"),
@@ -175,7 +175,7 @@ public class PostServices {
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, newPost.PostID);
+            preparedStatement.setInt(1,newPost.PostID);
             preparedStatement.setString(2, newPost.UserID);
             preparedStatement.setString(3, newPost.Image);
             preparedStatement.setString(4, newPost.Content);
