@@ -1,18 +1,16 @@
 package models;
 
-import java.time.LocalDate;
-
 public class InteractModel {
     public String InteractID;
     public int ParentID;
     public String UserID;
-    public int Count;
 
-    public InteractModel(String InteractID, int ParentID, String userID, int count) {
+
+    public InteractModel(String InteractID, int ParentID, String userID) {
         this.InteractID = InteractID;
         this.ParentID = ParentID;
         this.UserID = userID;
-        this.Count = count;
+
     }
 
     public String getInteractID() {
@@ -38,12 +36,5 @@ public class InteractModel {
     public void setUserID(String UserID) {
         this.UserID = UserID;
     }
-    
-    public int getCount() {
-        return Count;
-    }
 
-    public void setCount(int count) {
-        this.Count = Count;
-    }
 }
