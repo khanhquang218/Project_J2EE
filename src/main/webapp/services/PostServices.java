@@ -121,8 +121,7 @@ public class PostServices {
     public List<PostModel> GetPostOfUserByDate(String UserId, LocalDate StartDay){
         var ResultOfCheckUser = userService.CheckUserIsExists(UserId);
         String ConvertLocalDateToString = String.valueOf(StartDay);
-//        String query = "select * from post where UserID = '"+ UserId+"',LastModifedTime = '"+ StartDay+"'";
-        String query = String.format("select * from post where UserID = %s, LastModifedTime = %s",UserId, ConvertLocalDateToString);
+        String query = String.format("select * from post where 'UserID' = '%s', LastModifedTime > '%s'",UserId, ConvertLocalDateToString);
         List<PostModel> postModelList = new ArrayList<>();
         if(ResultOfCheckUser == true){
             try{
@@ -154,7 +153,7 @@ public class PostServices {
 
     //kiểm tra bài post đã tồn tại hay chưa
     public boolean CheckPostIsExists(int PostID) {
-        String query = String.format("select  * from post where PostID = %s ", PostID);
+        String query = String.format("select  * from post where PostID = '%s' ", PostID);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
@@ -236,4 +235,5 @@ public class PostServices {
         }
         return false;
     }
+
 }

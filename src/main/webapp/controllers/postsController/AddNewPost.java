@@ -1,4 +1,4 @@
-package controllers;
+package controllers.postsController;
 
 import models.PostModel;
 import services.PostServices;
