@@ -84,12 +84,13 @@ public class PostServices {
         return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
     }
     //tìm kiếm post theo UserName
-    public List<PostModel> GetPostsByUserName(String UserName){
+    public List<PostModel> GetPostsByUserName(String UserAccount){
         List<PostModel> postModelList = new ArrayList<>();
-        var resultOfCheck = userService.CheckUserNameExists(UserName);
+        var resultOfCheck = userService.CheckUserNameExists(UserAccount);
         if(resultOfCheck){
-            var userModelList = userService.FetchUserModelByUserName(UserName);
+            var userModelList = userService.FetchUserModelByUserName(UserAccount);
             try {
+                Configura.CheckDrive();
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER, configura.JDBC_PASSWORD);
                 for (var element : userModelList) {
                     String query = String.format("select * from post where UserId = %s", element.UserID);
