@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet({"/posts/5"})
+@WebServlet({"/posts/user/5"})
 public class FetchListPostOfUser extends HttpServlet {
     private PostServices postServices = new PostServices();
 
