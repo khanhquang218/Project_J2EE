@@ -15,9 +15,9 @@ import java.time.LocalDate;
 public class AddNewPost extends HttpServlet {
     private PostServices postServices = new PostServices();
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doPost(req, resp);
-        PostModel newPost = new PostModel(2,"1", "image",
+        PostModel newPost = new PostModel(3,"1", "image",
                 "demo code create of posts", LocalDate.now(),LocalDate.now(), LocalDate.now());
         var resultOfCreatePost = postServices.CreateNewPost(newPost);
         System.out.println(resultOfCreatePost);
