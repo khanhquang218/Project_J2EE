@@ -120,7 +120,9 @@ public class PostServices {
     //trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
     public List<PostModel> GetPostOfUserByDate(String UserId, LocalDate StartDay){
         var ResultOfCheckUser = userService.CheckUserIsExists(UserId);
-        String query = "select * from post where UserID = '"+ UserId+"',LastModifedTime = '"+ StartDay+"'";
+        String ConvertLocalDateToString = String.valueOf(StartDay);
+//        String query = "select * from post where UserID = '"+ UserId+"',LastModifedTime = '"+ StartDay+"'";
+        String query = String.format("select * from post where UserID = %s, LastModifedTime = %s",UserId, ConvertLocalDateToString);
         List<PostModel> postModelList = new ArrayList<>();
         if(ResultOfCheckUser == true){
             try{
