@@ -47,7 +47,7 @@ public class UserServices {
     }
     //tìm kiếm user bằng UserID
     public UserModel FetchUserModelByUserID(String UserID){
-        String query = String.format("select  * from person where UserID = %s ",UserID);
+        String query = String.format("select  * from person where UserID = '%s' ",UserID);
         UserModel userResult = new UserModel(null, null, null, null, null,
                 null, null, null, null);
         var resultOfCheckUserIsExists = CheckUserIsExists(UserID);
@@ -82,7 +82,7 @@ public class UserServices {
     //tìm kiếm user bằng UserAccount
     public  List<UserModel> FetchUserModelByUserName(String UserAccount){
         List<UserModel> userModelList = new ArrayList<>();
-        String query = String.format("select * from person where UserAccount = %s", UserAccount);
+        String query = String.format("select * from person where UserAccount = '%s'", UserAccount);
         var resultOfCheckUserNameExists = CheckUserNameExists(UserAccount);
         if(resultOfCheckUserNameExists){
             try {
@@ -113,7 +113,7 @@ public class UserServices {
     }
     //Kiểm tra tên người dùng có tồn tại hay không thông UserAccount
     public boolean CheckUserNameExists(String UserAccount){
-        String query = String.format("select * from person where UserAccount = %s ",UserAccount);
+        String query = String.format("select * from person where UserAccount = '%s' ",UserAccount);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
@@ -122,7 +122,7 @@ public class UserServices {
             if(resultSet != null){
                 return true;
             }
-            connection.close();
+
         }
         catch (SQLException exception){
             exception.printStackTrace();
@@ -131,7 +131,7 @@ public class UserServices {
     }
     //kiểm tra mã số người dùng có tồn tại hay không bằng UserUD
     public boolean CheckUserIsExists(String UserID){
-        String query = String.format("select  * from person where UserID = %s ",UserID);
+        String query = String.format("select  * from person where UserID = '%s' ",UserID);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
