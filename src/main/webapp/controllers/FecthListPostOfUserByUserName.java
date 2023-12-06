@@ -15,7 +15,7 @@ public class FecthListPostOfUserByUserName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        var resultOfListPostOfUserByUserName = postServices.GetPostsByUserName("a");
+        var resultOfListPostOfUserByUserName = postServices.GetPostsByUserName("aaaa");
         System.out.println(resultOfListPostOfUserByUserName);
         req.setAttribute("resultOfPostOfUserByUserName",resultOfListPostOfUserByUserName);
         req.getRequestDispatcher("/view/home.jsp");
