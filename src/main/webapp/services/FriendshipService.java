@@ -14,7 +14,7 @@ public class FriendshipService {
         var ResultOfCheckUserID2 = userServices.CheckUserIsExists(newFriendship.UserID2);
 
         if (ResultOfCheckUserID1 && ResultOfCheckUserID2) {
-            String query = "INSERT INTO friendship (FriendShipID, UserID1, UserID2, AcceptDate) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO friendship (FriendShipID, UserID1, UserID2, AcceptDate,Friend) VALUES (?, ?, ?, ?,?)";
 
             try {
                 Configura.CheckDrive();
@@ -25,7 +25,7 @@ public class FriendshipService {
                 preparedStatement.setString(2, newFriendship.UserID1);
                 preparedStatement.setString(3, newFriendship.UserID2);
                 preparedStatement.setDate(4, Date.valueOf(newFriendship.AcceptDate));
-
+                preparedStatement.setBoolean(5,newFriendship.Friend);
                 preparedStatement.executeUpdate();
                 return true;
             } catch (SQLException exception) {
@@ -39,7 +39,7 @@ public class FriendshipService {
         UserServices userServices = new UserServices();
         var ResultOfCheck = userServices.CheckUserIsExists(UserID);
         List<FriendshipModel> friendshipModelList = new ArrayList<>();
-        String query = String.format("select * from friendship where UserId1 = %s", UserID);
+        String query = String.format("select * from friendship where UserId1 = %s and Friend = true", UserID);
         if (ResultOfCheck){
             try{
                 Configura.CheckDrive();
@@ -51,7 +51,7 @@ public class FriendshipService {
                             resultSet.getString("FriendShipID"),
                             resultSet.getString("UserID1"),
                             resultSet.getString("UserID2"),
-                            resultSet.getDate("Accept").toLocalDate(),
+                            resultSet.getDate("AcceptDate").toLocalDate(),
                             resultSet.getBoolean("Friend")
                     );
                     friendshipModelList.add(friendshipModel);
