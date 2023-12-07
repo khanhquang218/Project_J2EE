@@ -68,7 +68,7 @@ public class FriendshipService {
         UserServices userServices = new UserServices();
         var resultOfCheck1 = userServices.CheckUserIsExists(UserID1);
         var resultOfCheck2 = userServices.CheckUserIsExists(UserID2);
-        String query = String.format("delete * from friendship where PostID1 = %s, PostID2 = %s", UserID1, UserID2);
+        String query = String.format("delete from friendship where UserID1 = '%s' and UserID2 = '%s' and Friend = true", UserID1, UserID2);
         if(resultOfCheck2 == true || resultOfCheck1 == true){
             try{
                 Configura.CheckDrive();
