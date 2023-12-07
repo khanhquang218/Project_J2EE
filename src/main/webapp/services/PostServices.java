@@ -52,7 +52,7 @@ public class PostServices {
     }
     //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
     public List<PostModel> GetPostOfUserID(String UserID){
-        String query = String.format("select  * from post where UserID = %s ",UserID);
+        String query = String.format("select  * from post where UserID = %d ",UserID);
         List<PostModel> postModelList = new ArrayList<>();
         var ResultOfCheckUser = userService.CheckUserIsExists(UserID);
         if(ResultOfCheckUser == true){
@@ -120,7 +120,7 @@ public class PostServices {
 
     //kiểm tra bài post đã tồn tại hay chưa
     public boolean CheckPostIsExists(int PostID) {
-        String query = String.format("select  * from post where PostID = '%s' ", PostID);
+        String query = String.format("select  * from post where PostID = '%d' ", PostID);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
@@ -161,7 +161,7 @@ public class PostServices {
     //xóa một bài post cũ
 
     public boolean DeletePostModel(int PostID) {
-        String query = String.format("delete * from post where PostID = %s", PostID);
+        String query = String.format("DELETE FROM post WHERE PostID = '%d'", PostID);
         var resultOfCheck = CheckPostIsExists(PostID);
         if (resultOfCheck) {
             try {
@@ -177,6 +177,7 @@ public class PostServices {
         }
         return false;
     }
+
     //cập nhật một bài post sẵn có
     //cập nhật nội dung, hình ảnh, và thời gian truy cập lần cuối
 
