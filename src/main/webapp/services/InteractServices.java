@@ -65,7 +65,7 @@ public class InteractServices {
         UserServices userServices = new UserServices();
         var resultOfCheckPost = postServices.CheckPostIsExists(newInteractModel.ParentID);
         var reusltOfCheckUser = userServices.CheckUserIsExists(newInteractModel.UserID);
-        String query = "insert into interact(InteractID, ParentID, UserID, CountID)";
+        String query = "insert into interact(InteractID, ParentID, UserID) values (?, ?, ?)";
         if (resultOfCheckPost == true && reusltOfCheckUser == true ){
             try{
                 Configura.CheckDrive();
