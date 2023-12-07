@@ -182,24 +182,26 @@ public class PostServices {
     //cập nhật nội dung, hình ảnh, và thời gian truy cập lần cuối
 
     public boolean EditPostModel(int PostID, String newContent, String newImages, LocalDate newLastModifedTime) {
-        String query = String.format("update post set Image = %s, Content = %s, LastModifedTime = %s where PostID = %s ", newImages, newContent,newLastModifedTime, PostID);
+        String query = "UPDATE post SET Image = ?, Content = ?, LastModifedTime = ? WHERE PostID = ?";
         var ResultOfCheck = CheckPostIsExists(PostID);
         if (ResultOfCheck) {
             try {
                 Configura.CheckDrive();
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1,newImages);
-                preparedStatement.setString(2,newContent);
-                preparedStatement.setString(3,String.valueOf(newLastModifedTime));
+                preparedStatement.setString(1, newImages);
+                preparedStatement.setString(2, newContent);
+                preparedStatement.setDate(3, Date.valueOf(newLastModifedTime)); // Chuyển LocalDate thành java.sql.Date
+                preparedStatement.setInt(4, PostID);
+
                 preparedStatement.executeUpdate();
                 return true;
-            }
-            catch (SQLException exception){
+            } catch (SQLException exception) {
                 exception.printStackTrace();
             }
             return false;
         }
         return false;
     }
+
 }
