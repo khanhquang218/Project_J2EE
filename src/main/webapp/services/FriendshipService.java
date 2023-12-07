@@ -8,30 +8,33 @@ import java.util.List;
 
 public class FriendshipService {
     private static final Configura configura = new Configura();
-    public  boolean CreateRelationship(FriendshipModel newFriendship){
+    public boolean CreateRelationship(FriendshipModel newFriendship) {
         UserServices userServices = new UserServices();
         var ResultOfCheckUserID1 = userServices.CheckUserIsExists(newFriendship.UserID1);
-        var ResutlOfCheckUserID2 = userServices.CheckUserIsExists(newFriendship.UserID2);
-        String query = String.format("insert friendship(FriendShipID, UserID1, UserID2, AcceptDate) " +
-                "values (?,?,?,?");
-        if(ResultOfCheckUserID1 == true && ResutlOfCheckUserID2 == true ){
+        var ResultOfCheckUserID2 = userServices.CheckUserIsExists(newFriendship.UserID2);
+
+        if (ResultOfCheckUserID1 && ResultOfCheckUserID2) {
+            String query = "INSERT INTO friendship (FriendShipID, UserID1, UserID2, AcceptDate) VALUES (?, ?, ?, ?)";
+
             try {
                 Configura.CheckDrive();
-                Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER, configura.JDBC_PASSWORD);
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
+
                 preparedStatement.setString(1, newFriendship.FriendshipID);
-                preparedStatement.setString(2,newFriendship.UserID1);
-                preparedStatement.setBoolean(3,newFriendship.Friend);
-                preparedStatement.setString(4,String.valueOf(newFriendship.AcceptDate));
+                preparedStatement.setString(2, newFriendship.UserID1);
+                preparedStatement.setString(3, newFriendship.UserID2);
+                preparedStatement.setDate(4, Date.valueOf(newFriendship.AcceptDate));
+
                 preparedStatement.executeUpdate();
                 return true;
-            }
-            catch (SQLException exception){
+            } catch (SQLException exception) {
                 exception.printStackTrace();
             }
         }
         return false;
     }
+
     public List<FriendshipModel> GetAllFriendShipOfUser(String UserID){
         UserServices userServices = new UserServices();
         var ResultOfCheck = userServices.CheckUserIsExists(UserID);
