@@ -1,0 +1,111 @@
+/* Header */
+header {
+    background-color: #ff4500;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+header li {
+    list-style: none;
+    display: inline;
+    margin-right: 10px;
+}
+
+/* Kiểu dáng cho các biểu tượng và nút */
+header i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+header a {
+    text-decoration: none;
+    color: #fff;
+}
+
+header button {
+    background-color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #ff4500;
+    cursor: pointer;
+}
+
+/* Kiểu dáng cho ô tìm kiếm */
+header input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Kiểu dáng cho nút tìm kiếm */
+header .fa-magnifying-glass {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* CreatePost */
+.reddit-post-form {
+    background-color: #C0C0C0;
+    width: 740px;
+    height: 290px;
+    margin: 50px auto;
+}
+
+.reddit-post-form ul {
+    border: 2px solid #C0C0C0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 15px;
+    padding: 1px 69px 1px 69px;
+    display: inline-block;
+}
+
+.PostButton {
+    display: inline-block;
+    border: 1px solid #C0C0C0;
+    background-color: #fff;
+}
+
+.PostText textarea {
+    font-family: 'Times New Roman', Times, serif;
+    width: 690px;
+    margin: 5px 10px 5px 10px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #333;
+}
+
+.PostText textarea {
+    height: 150px;
+    margin-top: 5px ;
+    border-bottom: 2px solid #fff;
+}
+
+button {
+    width: 70px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+
+button:hover {
+    background-color: #FFFF99;
+}
+
+.PostFunctionButton {
+    padding: 7px 10px 10px 500px;
+}
