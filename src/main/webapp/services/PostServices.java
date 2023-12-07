@@ -11,7 +11,6 @@ import java.util.List;
  * kiểm tra drive hoạt động hay không
  * trả về toàn bài post có trong database
  * trả về toàn bộ bài post của một người dùng bất kì bằng UserID
- * trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
  * trả về toàn bộ bài post của người dùng bằng UserName
  * tìm kiếm bài post dựa vào postID
  * kiểm tra bài post đã tồn tại hay chưa
@@ -117,39 +116,7 @@ public class PostServices {
         }
         return null;
     }
-    //trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
-    public List<PostModel> GetPostOfUserByDate(String UserId, LocalDate StartDay){
-        var ResultOfCheckUser = userService.CheckUserIsExists(UserId);
-        String ConvertLocalDateToString = String.valueOf(StartDay);
-        String query = String.format("select * from post where 'UserID' = '%s', LastModifedTime > '%s'",UserId, ConvertLocalDateToString);
-        List<PostModel> postModelList = new ArrayList<>();
-        if(ResultOfCheckUser == true){
-            try{
-                Configura.CheckDrive();
-                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
-                    PostModel post = new PostModel(
-                            resultSet.getInt("PostID"),
-                            resultSet.getString("UserID"),
-                            resultSet.getString("Image"),
-                            resultSet.getString("Content"),
-                            resultSet.getDate("DatePost").toLocalDate(),
-                            resultSet.getDate("Modifed").toLocalDate(),
-                            resultSet.getDate("LastModifedTime").toLocalDate()
-                    );
-                    System.out.println("PostID: " + resultSet.getString("PostID"));
-                    System.out.println("UserID: " + resultSet.getString("UserID"));
-                    postModelList.add(post);
-                }
-            }
-            catch (SQLException exception){
-                exception.printStackTrace();
-            }
-        }
-        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
-    }
+
 
     //kiểm tra bài post đã tồn tại hay chưa
     public boolean CheckPostIsExists(int PostID) {
@@ -168,7 +135,6 @@ public class PostServices {
         }
         return false;
     }
-
     // tạo mới một bài post
     public boolean CreateNewPost(PostModel newPost){
         String query = "INSERT INTO post(PostID, UserID, Image, Content, DatePost, Modifed, LastModifedTime) " +
@@ -235,5 +201,4 @@ public class PostServices {
         }
         return false;
     }
-
 }
