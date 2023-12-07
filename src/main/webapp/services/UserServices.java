@@ -57,19 +57,20 @@ public class UserServices {
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER,configura.JDBC_PASSWORD);
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                UserModel userModel = new UserModel(
-                        resultSet.getString("UserID"),
-                        resultSet.getString("FirstName"),
-                        resultSet.getString("LastName"),
-                        resultSet.getString("Email"),
-                        resultSet.getString("Phone"),
-                        resultSet.getString("UserAccount"),
-                        resultSet.getDate("DayOfBirth").toLocalDate(),
-                        resultSet.getString("Gender"),
-                        resultSet.getString("Address")
-                );
-                System.out.println("UserId: " + resultSet.getString("UserID"));
-                userResult = userModel;
+                while (resultSet.next()){
+                    UserModel userModel = new UserModel(
+                            resultSet.getString("UserID"),
+                            resultSet.getString("FirstName"),
+                            resultSet.getString("LastName"),
+                            resultSet.getString("Email"),
+                            resultSet.getString("Phone"),
+                            resultSet.getString("UserAccount"),
+                            resultSet.getDate("DayOfBirth").toLocalDate(),
+                            resultSet.getString("Gender"),
+                            resultSet.getString("Address")
+                    );
+                    userResult = userModel;
+                }
             }
             catch (SQLException exception){
                 exception.printStackTrace();
