@@ -18,7 +18,8 @@ public class AddFriend extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        FriendshipModel friendshipModel = new FriendshipModel("1","1","2", LocalDate.now(), true);
+        FriendshipModel friendshipModel = new FriendshipModel("1","1","2",
+                LocalDate.now(), true);
         var resultOfAddFriend = friendshipService.CreateRelationship(friendshipModel);
         System.out.println(resultOfAddFriend);
         req.setAttribute("resultOfAddFriend",resultOfAddFriend);
