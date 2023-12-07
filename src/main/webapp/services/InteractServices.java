@@ -37,7 +37,7 @@ public class InteractServices {
         PostServices postServices = new PostServices();
         var resultOfCheckPost = postServices.CheckPostIsExists(PostID);
         List<InteractModel> interactModelList = new ArrayList<>();
-        String query = String.format("select * from interact where PostID = %s",PostID);
+        String query = String.format("select * from interact where ParentID = %s",PostID);
         if(resultOfCheckPost == true){
             try {
                 Configura.CheckDrive();
