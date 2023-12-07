@@ -89,7 +89,7 @@ public class InteractServices {
         PostServices postServices = new PostServices();
         var resultOfCheckUser = userServices.CheckUserIsExists(UserID);
         var resultOfCheckPost = postServices.CheckPostIsExists(PostID);
-        String query = String.format("delete * from interact where UserId = %s, PostID = %d ",UserID,PostID);
+        String query = String.format("delete from interact where UserId = '%s' and ParentID = %d ",UserID,PostID);
         if (resultOfCheckPost == true && resultOfCheckUser == true){
             try{
                 Configura.CheckDrive();
