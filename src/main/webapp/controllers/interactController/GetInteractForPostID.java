@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet({"/post/interact/"})
+@WebServlet({"/posts/interact/"})
 public class GetInteractForPostID extends HttpServlet {
     private InteractServices interactServices = new InteractServices();
 
