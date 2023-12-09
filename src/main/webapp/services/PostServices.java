@@ -203,5 +203,57 @@ public class PostServices {
         }
         return false;
     }
+    //kiểm tra post có tôn tại hay không theo yêu cầu về UserID và mốc thời gian tìm kiếm
+    public boolean CheckPostsIsExitByUserIdAndDate(String userID, LocalDate timeLine) {
+        String query = "SELECT * FROM post WHERE UserID = ? AND LastModifedTime >= ?";
+        try {
+            Configura.CheckDrive();
+            Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userID);
+            preparedStatement.setDate(2, Date.valueOf(timeLine));
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            if (resultSet.next()) {
+                // có dữ liệu trong resultSet
+                return true;
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return false;
+    }
+    // đẩy ra anh sách post tồn lại và thỏa mãm yêu cầu
+    public List<PostModel> FetchListPostOfUserByDate (String UserId, LocalDate timeLine){
+        List<PostModel> postModelList = new ArrayList<>();
+        var resultOfCheck = CheckPostsIsExitByUserIdAndDate(UserId, timeLine);
+        String query = "SELECT * FROM post WHERE UserID = ? AND LastModifedTime >= ?";
+        if (resultOfCheck){
+            try {
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, UserId);
+                preparedStatement.setDate(2, Date.valueOf(timeLine));
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getInt("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+            return postModelList;
+        }
+        return null;
+    }
 }
