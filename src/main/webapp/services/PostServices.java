@@ -256,4 +256,38 @@ public class PostServices {
         }
         return null;
     }
+    //lấy thông tin toàn bộ post của bạn bè ( PostOfFriend)
+    public List<PostModel> FetchListPostOfFriend(String UserId) {
+        FriendshipService friendshipService = new FriendshipService();
+        var listFriend = friendshipService.GetAllFriendShipOfUser(UserId);
+        List<PostModel> postModelList = new ArrayList<>();
+        if(listFriend != null){
+            try {
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                for (var element : listFriend) {
+                    String query = String.format("select  * from post where UserID = %s ", element.UserID2);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery(query);
+                    while (resultSet.next()) {
+                        PostModel post = new PostModel(
+                                resultSet.getInt("PostID"),
+                                resultSet.getString("UserID"),
+                                resultSet.getString("Image"),
+                                resultSet.getString("Content"),
+                                resultSet.getDate("DatePost").toLocalDate(),
+                                resultSet.getDate("Modifed").toLocalDate(),
+                                resultSet.getDate("LastModifedTime").toLocalDate()
+                        );
+                        postModelList.add(post);
+                    }
+                }
+            }
+            catch (SQLException sqlException){
+                sqlException.printStackTrace();
+            }
+            return postModelList;
+        }
+        return null;
+    }
 }
