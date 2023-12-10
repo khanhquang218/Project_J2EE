@@ -10,7 +10,7 @@ public class CommentModel {
     public int ParentID;
     public int PostID;
     public LocalDate CreateDate;
-    public CommentModel(int CommentID, String Content, int UserID, int ParentID, int PostID,
+    public CommentModel(int CommentID, String Content, String UserID, int ParentID, int PostID,
                         LocalDate CreateDate){
         this.CommentID = CommentID;
         this.Content = Content;
