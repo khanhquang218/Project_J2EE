@@ -6,20 +6,18 @@ import java.time.LocalDate;
 public class CommentModel {
     public int CommentID;
     public String Content;
+    public String UserID;
     public int ParentID;
     public int PostID;
-    public String UserID;
     public LocalDate CreateDate;
-    public int Levels;
-    public CommentModel(int CommentID, String Content, int ParentID, int PostID,String UserID,
-                        LocalDate CreateDate, int Levels){
+    public CommentModel(int CommentID, String Content, int UserID, int ParentID, int PostID,
+                        LocalDate CreateDate){
         this.CommentID = CommentID;
         this.Content = Content;
+        this.UserID = UserID;
         this.ParentID = ParentID;
         this.PostID = PostID;
-        this.UserID = UserID;
         this.CreateDate = CreateDate;
-        this.Levels = Levels;
     }
 
     public int getCommentID() {
@@ -42,13 +40,9 @@ public class CommentModel {
 
     public void setParentID(int ParentID) { this.ParentID = ParentID;}
 
-    public int getPostID() {
-        return PostID;
-    }
+    public int getPostID() {return PostID;}
 
-    public void setPostID(int PostID) {
-        this.PostID = PostID;
-    }
+    public void setPostID(int PostID) {this.PostID = PostID;}
 
     public String getUserID() {
         return UserID;
@@ -64,13 +58,5 @@ public class CommentModel {
 
     public void CreateDate(LocalDate CreateDate) {
         this.CreateDate = CreateDate;
-    }
-
-    public int getLevels() {
-        return Levels;
-    }
-
-    public void setLevels(int Levels) {
-        this.Levels = Levels;
     }
 }

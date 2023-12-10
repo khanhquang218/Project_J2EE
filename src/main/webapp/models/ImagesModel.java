@@ -15,35 +15,35 @@ public class ImagesModel {
         this.ParentID = ParentID;
     }
 
-    public String getimageID() {
+    public String getImageID() {
         return imageID;
     }
 
-    public void setimageID(String imageID) {
+    public void setImageID(String imageID) {
         this.imageID = imageID;
     }
 
-    public String getimageName() {
+    public String getImageName() {
         return imageName;
     }
 
-    public void setimageName(String imageName) {
+    public void setImageName(String imageName) {
         this.imageName = imageName;
     }
 
-    public String getimageURL() {
+    public String getImageURL() {
         return imageURL;
     }
 
-    public void setimageURL(String imageURL) {
+    public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
 
-    public String ParentID() {
+    public String getParentID() {
         return ParentID;
     }
 
-    public void setParentID(String ParentID) {
-        this.ParentID = ParentID;
+    public void setParentID(String parentID) {
+        ParentID = parentID;
     }
 }
