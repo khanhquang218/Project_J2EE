@@ -7,15 +7,13 @@ public class CommentModel {
     public int CommentID;
     public String Content;
     public String UserID;
-    public int ParentID;
     public int PostID;
     public LocalDate CreateDate;
-    public CommentModel(int CommentID, String Content, String UserID, int ParentID, int PostID,
+    public CommentModel(int CommentID, String Content, String UserID, int PostID,
                         LocalDate CreateDate){
         this.CommentID = CommentID;
         this.Content = Content;
         this.UserID = UserID;
-        this.ParentID = ParentID;
         this.PostID = PostID;
         this.CreateDate = CreateDate;
     }
@@ -35,10 +33,6 @@ public class CommentModel {
     public void setContent(String Content) {
         this.Content = Content;
     }
-
-    public int getParentID() { return ParentID;}
-
-    public void setParentID(int ParentID) { this.ParentID = ParentID;}
 
     public int getPostID() {return PostID;}
 
