@@ -1,6 +1,7 @@
 package models;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 public class CommentModel {

@@ -1,6 +1,7 @@
 package services;
 
 import models.CommentModel;
+import models.InteractModel;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -40,7 +41,7 @@ public class CommentServices {
         PostServices postServices = new PostServices();
         var resultOfCheckPost = postServices.CheckPostIsExists(PostID);
         List<CommentModel> commentModelList = new ArrayList<>();
-        String query = String.format("select * from comments where PostID = %d",PostID);
+        String query = String.format("select * from comments where PostID = %s",PostID);
         if(resultOfCheckPost == true){
             try {
                 Configura.CheckDrive();
@@ -67,28 +68,32 @@ public class CommentServices {
     }
     //Tạo Comment
     public boolean CreateComment(CommentModel newComment) {
-        PostServices postServices = new PostServices();
-        var ResultOfCheckPostID = postServices.CheckPostIsExists(newComment.PostID);
-        if (ResultOfCheckPostID) {
-            String query = "INSERT INTO comments (CommentID, Content, UserID, PostID, CreateDate)" +
-                    " VALUES (?,?,?,?,?,?)";
-            try {
-                Configura.CheckDrive();
-                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PostServices postServices = new PostServices();
+            UserServices userServices = new UserServices();
+            var resultOfCheckPost = postServices.CheckPostIsExists(newComment.PostID);
+            var reusltOfCheckUser = userServices.CheckUserIsExists(newComment.UserID);
+            String query = "insert into comments(CommentID, Content, UserID, PostID, CreateDate) values (?, ?, ?, ?,?)";
+            if (resultOfCheckPost == true && reusltOfCheckUser == true ){
+                try{
+                    Configura.CheckDrive();
+                    Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER, configura.JDBC_PASSWORD);
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setInt(1,newComment.CommentID);
+                    preparedStatement.setString(2,newComment.Content);
+                    preparedStatement.setString(3,newComment.UserID);
+                    preparedStatement.setInt(4, newComment.PostID);
+                    preparedStatement.setString(5,String.valueOf(newComment.CreateDate));
+                    preparedStatement.executeUpdate();
+                    return true;
+                }
+                catch (SQLException sqlException){
+                    sqlException.printStackTrace();
+                }
 
-                preparedStatement.setInt(1, newComment.CommentID);
-                preparedStatement.setString(2, newComment.Content);
-                preparedStatement.setString(3, newComment.UserID);
-                preparedStatement.setInt(4,newComment.PostID);
-                preparedStatement.setDate(5, Date.valueOf(newComment.CreateDate));
-                preparedStatement.executeUpdate();
-                return true;
-            } catch (SQLException exception) {
-                exception.printStackTrace();
+                return false;
             }
-        }
-        return false;
+            System.out.println("NGU hon");
+            return false;
     }
     //Delete Comment
     public boolean DeleteComment(int PostID, String UserID){
