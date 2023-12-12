@@ -1,7 +1,6 @@
 package services;
 
 import models.CommentModel;
-import models.InteractModel;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -118,8 +117,8 @@ public class CommentServices {
         return false;
     }
     //Chỉnh sửa comment của bài viết
-    public boolean EditCommentModel(int PostID, String newContent, String newCreateDate) {
-        String query = "UPDATE post SET Content = ?, CreateDate = ? WHERE PostID = ?";
+    public boolean EditCommentModel(int PostID, String newContent, LocalDate newCreateDate) {
+        String query = "UPDATE comments SET Content = ?, CreateDate = ? WHERE PostID = ?";
         PostServices postServices = new PostServices();
         var ResultOfCheck = postServices.CheckPostIsExists(PostID);
         if (ResultOfCheck) {
@@ -127,10 +126,9 @@ public class CommentServices {
                 Configura.CheckDrive();
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(2, newContent);
-                preparedStatement.setDate(3, Date.valueOf(newCreateDate));
-                preparedStatement.setInt(4, PostID);
-
+                preparedStatement.setString(1, newContent);
+                preparedStatement.setDate(2,Date.valueOf(newCreateDate));
+                preparedStatement.setInt(3, PostID);
                 preparedStatement.executeUpdate();
                 return true;
             } catch (SQLException exception) {

@@ -16,7 +16,7 @@ public class DeleteInteract extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        var resultOfListInteractOfPost = interactServices.DeleteAInteract(1,"1");
+        var resultOfListInteractOfPost = interactServices.DeleteAInteract(1,"2");
         System.out.println(resultOfListInteractOfPost);
         req.setAttribute("resultOfListInteractOfPost",resultOfListInteractOfPost);
         req.getRequestDispatcher("/view/home.jsp");
