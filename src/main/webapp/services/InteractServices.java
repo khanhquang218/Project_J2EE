@@ -37,7 +37,7 @@ public class InteractServices {
         PostServices postServices = new PostServices();
         var resultOfCheckPost = postServices.CheckPostIsExists(PostID);
         List<InteractModel> interactModelList = new ArrayList<>();
-        String query = String.format("select * from interact where PostID = %s",PostID);
+        String query = String.format("select * from interact where ParentID = %s",PostID);
         if(resultOfCheckPost == true){
             try {
                 Configura.CheckDrive();
@@ -65,7 +65,7 @@ public class InteractServices {
         UserServices userServices = new UserServices();
         var resultOfCheckPost = postServices.CheckPostIsExists(newInteractModel.ParentID);
         var reusltOfCheckUser = userServices.CheckUserIsExists(newInteractModel.UserID);
-        String query = "insert into interact(InteractID, ParentID, UserID, CountID)";
+        String query = "insert into interact(InteractID, ParentID, UserID) values (?, ?, ?)";
         if (resultOfCheckPost == true && reusltOfCheckUser == true ){
             try{
                 Configura.CheckDrive();
@@ -89,7 +89,7 @@ public class InteractServices {
         PostServices postServices = new PostServices();
         var resultOfCheckUser = userServices.CheckUserIsExists(UserID);
         var resultOfCheckPost = postServices.CheckPostIsExists(PostID);
-        String query = String.format("delete * from interact where UserId = %s, PostID = %d ",UserID,PostID);
+        String query = String.format("delete from interact where UserId = '%s' and ParentID = %d ",UserID,PostID);
         if (resultOfCheckPost == true && resultOfCheckUser == true){
             try{
                 Configura.CheckDrive();

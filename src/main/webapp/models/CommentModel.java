@@ -1,25 +1,22 @@
 package models;
 
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 public class CommentModel {
     public int CommentID;
     public String Content;
-    public int ParentID;
-    public int PostID;
     public String UserID;
+    public int PostID;
     public LocalDate CreateDate;
-    public int Levels;
-    public CommentModel(int CommentID, String Content, int ParentID, int PostID,String UserID,
-                        LocalDate CreateDate, int Levels){
+    public CommentModel(int CommentID, String Content, String UserID, int PostID,
+                        LocalDate CreateDate){
         this.CommentID = CommentID;
         this.Content = Content;
-        this.ParentID = ParentID;
-        this.PostID = PostID;
         this.UserID = UserID;
+        this.PostID = PostID;
         this.CreateDate = CreateDate;
-        this.Levels = Levels;
     }
 
     public int getCommentID() {
@@ -38,17 +35,9 @@ public class CommentModel {
         this.Content = Content;
     }
 
-    public int getParentID() { return ParentID;}
+    public int getPostID() {return PostID;}
 
-    public void setParentID(int ParentID) { this.ParentID = ParentID;}
-
-    public int getPostID() {
-        return PostID;
-    }
-
-    public void setPostID(int PostID) {
-        this.PostID = PostID;
-    }
+    public void setPostID(int PostID) {this.PostID = PostID;}
 
     public String getUserID() {
         return UserID;
@@ -64,13 +53,5 @@ public class CommentModel {
 
     public void CreateDate(LocalDate CreateDate) {
         this.CreateDate = CreateDate;
-    }
-
-    public int getLevels() {
-        return Levels;
-    }
-
-    public void setLevels(int Levels) {
-        this.Levels = Levels;
     }
 }

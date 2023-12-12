@@ -1,0 +1,134 @@
+/* Header */
+header {
+    background-color: #ff4500;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+header li {
+    list-style: none;
+    display: inline;
+    margin-right: 10px;
+}
+
+/* Kiểu dáng cho các biểu tượng và nút */
+header i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+header a {
+    text-decoration: none;
+    color: #fff;
+}
+
+header button {
+    background-color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #ff4500;
+    cursor: pointer;
+}
+
+/* Kiểu dáng cho ô tìm kiếm */
+header input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Kiểu dáng cho nút tìm kiếm */
+header .fa-magnifying-glass {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* /////////////////////Post///////////////// */
+/* Kiểu dáng cho phần bài viết */
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px 400px 10px 400px;
+    padding: 10px;
+}
+
+/* Phần header của bài viết */
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+.post-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-time {
+    color: #888;
+}
+
+/* Nọi dung bài viết */
+.post-content {
+    border : 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Phần tương tác */
+.post-actions {
+    margin-top: 5px;
+}
+
+.post-actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #555;
+}
+
+.post-actions a:hover {
+    color: #ff4500;
+}
+
+/* Box Bình luận */
+.commentbox textarea {
+    width: 625px;
+    padding: 10px;
+    margin: 5px 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    resize: none;
+}
+
+/* User bình luận */
+.user-comment {
+    background-color: #ddd;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.user-avatar-comment .comment-details {
+    display: flex;
+}
+
+.comment_content {
+    padding-left: 15px;
+}

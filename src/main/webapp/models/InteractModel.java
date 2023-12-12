@@ -10,7 +10,6 @@ public class InteractModel {
         this.InteractID = InteractID;
         this.ParentID = ParentID;
         this.UserID = userID;
-
     }
 
     public String getInteractID() {

@@ -11,7 +11,6 @@ import java.util.List;
  * kiểm tra drive hoạt động hay không
  * trả về toàn bài post có trong database
  * trả về toàn bộ bài post của một người dùng bất kì bằng UserID
- * trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
  * trả về toàn bộ bài post của người dùng bằng UserName
  * tìm kiếm bài post dựa vào postID
  * kiểm tra bài post đã tồn tại hay chưa
@@ -33,7 +32,7 @@ public class PostServices {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 PostModel post = new PostModel(
-                        resultSet.getString("PostID"),
+                        resultSet.getInt("PostID"),
                         resultSet.getString("UserID"),
                         resultSet.getString("Image"),
                         resultSet.getString("Content"),
@@ -52,7 +51,7 @@ public class PostServices {
         return postModelList;
     }
     //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
-    public List<PostModel> GetPostOfFriendByUserID(String UserID){
+    public List<PostModel> GetPostOfUserID(String UserID){
         String query = String.format("select  * from post where UserID = %s ",UserID);
         List<PostModel> postModelList = new ArrayList<>();
         var ResultOfCheckUser = userService.CheckUserIsExists(UserID);
@@ -64,7 +63,7 @@ public class PostServices {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()){
                     PostModel post = new PostModel(
-                            resultSet.getString("PostID"),
+                            resultSet.getInt("PostID"),
                             resultSet.getString("UserID"),
                             resultSet.getString("Image"),
                             resultSet.getString("Content"),
@@ -84,12 +83,13 @@ public class PostServices {
         return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
     }
     //tìm kiếm post theo UserName
-    public List<PostModel> GetPostsByUserName(String UserName){
+    public List<PostModel> GetPostsByUserName(String UserAccount){
         List<PostModel> postModelList = new ArrayList<>();
-        var resultOfCheck = userService.CheckUserNameExists(UserName);
+        var resultOfCheck = userService.CheckUserNameExists(UserAccount);
         if(resultOfCheck){
-            var userModelList = userService.FetchUserModelByUserName(UserName);
+            var userModelList = userService.FetchUserModelByUserName(UserAccount);
             try {
+                Configura.CheckDrive();
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL,configura.JDBC_USER, configura.JDBC_PASSWORD);
                 for (var element : userModelList) {
                     String query = String.format("select * from post where UserId = %s", element.UserID);
@@ -97,7 +97,7 @@ public class PostServices {
                     ResultSet resultSet = statement.executeQuery(query);
                     while (resultSet.next()) {
                         PostModel post = new PostModel(
-                                resultSet.getString("PostID"),
+                                resultSet.getInt("PostID"),
                                 resultSet.getString("UserID"),
                                 resultSet.getString("Image"),
                                 resultSet.getString("Content"),
@@ -116,42 +116,11 @@ public class PostServices {
         }
         return null;
     }
-    //trả về toàn bộ bài post của một người dùng bất kì dự vào thời gian
-    public List<PostModel> GetPostOfUserByDate(String UserId, LocalDate StartDay){
-        var ResultOfCheckUser = userService.CheckUserIsExists(UserId);
-        String query = "select * from post where UserID = '"+ UserId+"',LastModifedTime = '"+ StartDay+"'";
-        List<PostModel> postModelList = new ArrayList<>();
-        if(ResultOfCheckUser == true){
-            try{
-                Configura.CheckDrive();
-                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
-                    PostModel post = new PostModel(
-                            resultSet.getString("PostID"),
-                            resultSet.getString("UserID"),
-                            resultSet.getString("Image"),
-                            resultSet.getString("Content"),
-                            resultSet.getDate("DatePost").toLocalDate(),
-                            resultSet.getDate("Modifed").toLocalDate(),
-                            resultSet.getDate("LastModifedTime").toLocalDate()
-                    );
-                    System.out.println("PostID: " + resultSet.getString("PostID"));
-                    System.out.println("UserID: " + resultSet.getString("UserID"));
-                    postModelList.add(post);
-                }
-            }
-            catch (SQLException exception){
-                exception.printStackTrace();
-            }
-        }
-        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
-    }
+
 
     //kiểm tra bài post đã tồn tại hay chưa
     public boolean CheckPostIsExists(int PostID) {
-        String query = String.format("select  * from post where PostID = %s ", PostID);
+        String query = String.format("select  * from post where PostID = '%d' ", PostID);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
@@ -166,7 +135,6 @@ public class PostServices {
         }
         return false;
     }
-
     // tạo mới một bài post
     public boolean CreateNewPost(PostModel newPost){
         String query = "INSERT INTO post(PostID, UserID, Image, Content, DatePost, Modifed, LastModifedTime) " +
@@ -175,7 +143,7 @@ public class PostServices {
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, newPost.PostID);
+            preparedStatement.setInt(1,newPost.PostID);
             preparedStatement.setString(2, newPost.UserID);
             preparedStatement.setString(3, newPost.Image);
             preparedStatement.setString(4, newPost.Content);
@@ -193,7 +161,7 @@ public class PostServices {
     //xóa một bài post cũ
 
     public boolean DeletePostModel(int PostID) {
-        String query = String.format("delete * from post where PostID = %s", PostID);
+        String query = String.format("DELETE FROM post WHERE PostID = '%d'", PostID);
         var resultOfCheck = CheckPostIsExists(PostID);
         if (resultOfCheck) {
             try {
@@ -209,28 +177,117 @@ public class PostServices {
         }
         return false;
     }
+
     //cập nhật một bài post sẵn có
     //cập nhật nội dung, hình ảnh, và thời gian truy cập lần cuối
 
     public boolean EditPostModel(int PostID, String newContent, String newImages, LocalDate newLastModifedTime) {
-        String query = String.format("update post set Image = %s, Content = %s, LastModifedTime = %s where PostID = %s ", newImages, newContent,newLastModifedTime, PostID);
+        String query = "UPDATE post SET Image = ?, Content = ?, LastModifedTime = ? WHERE PostID = ?";
         var ResultOfCheck = CheckPostIsExists(PostID);
         if (ResultOfCheck) {
             try {
                 Configura.CheckDrive();
                 Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1,newImages);
-                preparedStatement.setString(2,newContent);
-                preparedStatement.setString(3,String.valueOf(newLastModifedTime));
+                preparedStatement.setString(1, newImages);
+                preparedStatement.setString(2, newContent);
+                preparedStatement.setDate(3, Date.valueOf(newLastModifedTime)); // Chuyển LocalDate thành java.sql.Date
+                preparedStatement.setInt(4, PostID);
+
                 preparedStatement.executeUpdate();
                 return true;
-            }
-            catch (SQLException exception){
+            } catch (SQLException exception) {
                 exception.printStackTrace();
             }
             return false;
         }
         return false;
+    }
+    //kiểm tra post có tôn tại hay không theo yêu cầu về UserID và mốc thời gian tìm kiếm
+    public boolean CheckPostsIsExitByUserIdAndDate(String userID, LocalDate timeLine) {
+        String query = "SELECT * FROM post WHERE UserID = ? AND LastModifedTime >= ?";
+        try {
+            Configura.CheckDrive();
+            Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userID);
+            preparedStatement.setDate(2, Date.valueOf(timeLine));
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // có dữ liệu trong resultSet
+                return true;
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return false;
+    }
+    // đẩy ra anh sách post tồn lại và thỏa mãm yêu cầu
+    public List<PostModel> FetchListPostOfUserByDate (String UserId, LocalDate timeLine){
+        List<PostModel> postModelList = new ArrayList<>();
+        var resultOfCheck = CheckPostsIsExitByUserIdAndDate(UserId, timeLine);
+        String query = "SELECT * FROM post WHERE UserID = ? AND LastModifedTime >= ?";
+        if (resultOfCheck){
+            try {
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, UserId);
+                preparedStatement.setDate(2, Date.valueOf(timeLine));
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getInt("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+            return postModelList;
+        }
+        return null;
+    }
+    //lấy thông tin toàn bộ post của bạn bè ( PostOfFriend)
+    public List<PostModel> FetchListPostOfFriend(String UserId) {
+        FriendshipService friendshipService = new FriendshipService();
+        var listFriend = friendshipService.GetAllFriendShipOfUser(UserId);
+        List<PostModel> postModelList = new ArrayList<>();
+        if(listFriend != null){
+            try {
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                for (var element : listFriend) {
+                    String query = String.format("select  * from post where UserID = %s ", element.UserID2);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery(query);
+                    while (resultSet.next()) {
+                        PostModel post = new PostModel(
+                                resultSet.getInt("PostID"),
+                                resultSet.getString("UserID"),
+                                resultSet.getString("Image"),
+                                resultSet.getString("Content"),
+                                resultSet.getDate("DatePost").toLocalDate(),
+                                resultSet.getDate("Modifed").toLocalDate(),
+                                resultSet.getDate("LastModifedTime").toLocalDate()
+                        );
+                        postModelList.add(post);
+                    }
+                }
+            }
+            catch (SQLException sqlException){
+                sqlException.printStackTrace();
+            }
+            return postModelList;
+        }
+        return null;
     }
 }
