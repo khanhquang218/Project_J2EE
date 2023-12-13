@@ -1,0 +1,309 @@
+*{
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+/* Body */
+body {
+    background-color: #F0F2F5;
+}
+/* Header */
+.header {
+    background-color: #FF5414;
+    padding: 5px;
+    margin: none;
+}
+
+.header ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.header ul a {
+    text-decoration: none;
+}
+
+.header ul li {
+    padding: 12px 6px;
+    transition: all 0.3s ease;
+}
+
+.header ul li a {
+    color: black;
+    font-size: 18px;
+}
+
+.header ul li a:hover {
+    background-color: aliceblue;
+}
+
+.header ul li a i {
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.header ul li button i {
+    margin-right: 6px;
+    font-size: 18px;
+}
+
+.header ul li button {
+    width: 50px;
+    height: 25px;
+    padding-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, 1);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+
+/* header của trang cá nhân */
+.header-user {
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+    background-color: #DDDDDD;
+    width: 880px;
+    height: 300px;
+    margin: 10px 300px 20px 300px;
+}
+
+.user-information ul {
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 1px solid black;
+    width: 60px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 80px 60px 0 60px;
+    display: inline-block;
+}
+
+.user-information a {
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    color: black;
+}
+
+.user-information a:hover {
+    color: #888888;
+}
+
+.user-information button {
+    height: 30px;
+    margin-inline-start: 800px;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    background-color: #DDDDDD;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+.user-information button:hover {
+    background-color: #888888;
+}
+
+.main-function {
+    border-top: 1px solid #C0C0C0;
+    padding-top: 15px;
+    margin: 20px 10px 0 10px;
+}
+
+.main-function a {
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 80px;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.main-function a:hover {
+    background-color: #EEEEEE;
+}
+
+/* Thong tin ca nhan */
+.user-information-detail {
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+    background-color: #DDDDDD;
+    width: 880px;
+    height: 350px;
+    margin: 10px 300px 20px 300px;
+}
+
+.user-information-detail p {
+    font-family: 'Times New Roman', Times, serif;
+    display: inline-block;
+}
+
+.overview-user {
+    margin: 10px 0 10px 20px;
+    font-size: 18px;
+}
+/* Email */
+.user-email{
+    margin-left: 20px;
+}
+.user-email-detail{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.email button {
+    border: none;
+    background-color: #DDDDDD;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    margin-inline-start: 750px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.email button:hover {
+    background-color: #888888;
+}
+
+.email {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+/* Phone */
+.user-phone {
+    margin-left: 20px;
+}
+
+.user-phone-detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.phone button {
+    border: none;
+    background-color: #DDDDDD;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    margin-inline-start: 748px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.phone button:hover {
+    background-color: #888888;
+}
+
+.phone {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+/* Ngay sinh */
+.user-dayofbirth {
+    margin-left: 20px;
+}
+
+.user-dayofbirth-detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dayofbirth button {
+    border: none;
+    background-color: #DDDDDD;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    margin-inline-start: 728px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.dayofbirth button:hover {
+    background-color: #888888;
+}
+
+.dayofbirth {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+/* Gioi tinh */
+.user-gender {
+    margin-left: 20px;
+}
+
+.user-gender-detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.gender button {
+    border: none;
+    background-color: #DDDDDD;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    margin-inline-start: 730px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.gender button:hover {
+    background-color: #888888;
+}
+
+.gender {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+/* Dia chi */
+.user-address {
+    margin-left: 20px;
+}
+
+.user-address-detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.address button {
+    border: none;
+    background-color: #DDDDDD;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    margin-inline-start: 747px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.address button:hover {
+    background-color: #888888;
+}
+
+.address {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 10px;
+}
