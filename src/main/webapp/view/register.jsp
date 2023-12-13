@@ -1,11 +1,11 @@
-<%@ page import="model.PostRequestModel" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/register.css" />
     <title>Reddit - Đăng ký</title>
 </head>
 <body>

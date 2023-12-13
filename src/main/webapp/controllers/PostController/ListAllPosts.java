@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/post/admin/")
+@WebServlet("/post/test/")
 public class ListAllPosts extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostServices postServices = new PostServices();
         List<PostModel> posts = postServices.GetAllPosts();
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("/views/list-post.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/CommentPost.jsp").forward(request, response);
     }
 }
