@@ -22,32 +22,34 @@
         <li><button><i class="fa-solid fa-plus"></i></button></li>
         <li><button><i class="fa-regular fa-user"></i></button></li>
     </header>
-    <div class="reddit-post-form">
-      <ul>
-        <div class="PostButton">
-          <p><i class="fas fa-bars"></i> Post</p>
-        </div>
-        
-        <div class="PostButton">
-          <p><i class="fas fa-image"></i> Image & Video</p>
-        </div>
-        
-        <div class="PostButton">
-          <p><i class="fas fa-link"></i> Link</p>
-        </div>
+    <form action="${pageContext.request.contextPath}/user/newPost/add" method="get">
+        <header>
+            <!-- Các thẻ header -->
+        </header>
+        <div class="reddit-post-form">
+            <ul>
+                <div class="PostButton">
+                    <p><i class="fas fa-bars"></i> Post</p>
+                </div>
 
-        <div class="PostText">
-          <ion-icon name="Text-outline"></ion-icon>
-          <textarea id="text-post" placeholder="Enter text post"></textarea>
+                <div class="PostButton">
+                    <p><i class="fas fa-image"></i> Image & Video</p>
+                </div>
+
+                <div class="PostButton">
+                    <p><i class="fas fa-link"></i> Link</p>
+                </div>
+
+                <div class="PostText">
+                    <ion-icon name="Text-outline"></ion-icon>
+                    <textarea id="text-post" name="text-post" placeholder="Enter text post"></textarea>
+                </div>
+
+                <div class="PostFunctionButton">
+                    <button class="post-btn" type="submit">Post</button>
+                </div>
+            </ul>
         </div>
-        
-        <div class="PostFunctionButton">
-          <button class="upload-btn">Upload</button>
-          <button class="cancel-btn">Cancel</button>
-          <button class="post-btn">Post</button>
-        </div>
-        
-      </ul>
-    </div>
+    </form>
 </body>
 </html>
