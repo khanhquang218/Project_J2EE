@@ -17,7 +17,7 @@ public class ListAllPosts extends HttpServlet {
         PostServices postServices = new PostServices();
         List<PostModel> posts = postServices.GetAllPosts();
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("/views/list-post.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/User-ThongTin.jsp").forward(request, response);
     }
 
     @Override
