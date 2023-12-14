@@ -19,4 +19,10 @@ public class ListAllPosts extends HttpServlet {
         request.setAttribute("posts", posts);
         request.getRequestDispatcher("/views/list-post.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        super.doPost(req, resp);
+
+    }
 }
