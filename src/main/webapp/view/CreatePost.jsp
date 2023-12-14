@@ -42,14 +42,7 @@
             <ul>
                 <div class="PostButton">
                     <p><i class="fas fa-bars"></i> Post</p>
-                </div>
-
-                <div class="PostButton">
-                    <p><i class="fas fa-image"></i> Image & Video</p>
-                </div>
-
-                <div class="PostButton">
-                    <p><i class="fas fa-link"></i> Link</p>
+                    <p><i class="fas fa-image"></i> Image</p>
                 </div>
 
                 <div class="PostText">
