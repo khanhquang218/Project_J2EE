@@ -35,12 +35,13 @@
         </div>
     </header>
     <!-- Thong tin nguoi dung -->
+    <c:set var="user" value="${requestScope.userDetail}" />
     <div class="header-user">
         <div class="user-information">
             <ul>
-                <img src="user_avatar.jpg" alt="Avatar">
+                <img src="keqing.jpg" alt="Avatar">
             </ul>
-            <a href="">Tên người dùng</a>
+            <a href=""><p>${user.userAccount}</p></a>
             <button>Chỉnh sửa</button>
         </div>
         <div class="main-function">
@@ -58,7 +59,7 @@
 
         <div class="user-email">
             <div class="user-email-detail">
-                <p>sieunguyen@gmail.com</p>     
+                <p>${user.email}</p>
             </div>
             <div class="email">
                 <p><i class="fa-regular fa-envelope"></i> Email</p>
@@ -68,17 +69,17 @@
 
         <div class="user-phone">
             <div class="user-phone-detail">
-                <p>0123456789</p>               
+                <p>${user.phone}</p>
             </div>
             <div class="phone">
                 <p><i class="fa-solid fa-phone"></i> Phone</p>
                 <button><i class="fa-regular fa-pen-to-square"></i></button>
-            </div>                        
+            </div>
         </div>
 
         <div class="user-dayofbirth">
             <div class="user-dayofbirth-detail">
-                <p>11-11-2002</p>                
+                
             </div>
             <div class="dayofbirth">
                 <p><i class="fa-solid fa-cake-candles"></i> Ngày sinh</p>
@@ -88,12 +89,12 @@
 
         <div class="user-gender">
             <div class="user-gender-detail">
-                <p>Nam</p>               
+                <p>Nam</p>
             </div>
             <div class="gender">
                 <p><i class="fa-solid fa-venus-mars"></i> Giới tính</p>
                 <button><i class="fa-regular fa-pen-to-square"></i></button>
-            </div>                        
+            </div>
         </div>
 
         <div class="user-address">
@@ -103,9 +104,10 @@
             <div class="address">
                 <p><i class="fa-solid fa-location-dot"></i> Địa chỉ</p>
                 <button><i class="fa-regular fa-pen-to-square"></i></button>
-            </div>            
+            </div>
         </div>
-        
+
     </div>
+
 </body>
 </html>
