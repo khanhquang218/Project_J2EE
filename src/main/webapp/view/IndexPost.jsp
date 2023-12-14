@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;500&family=Roboto:wght@100;300;400&family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/User-BangTin.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/IndexPost.css" />
     <title>J2EE - Trang Chủ</title>
 </head>
 <body>
@@ -34,22 +34,7 @@
             </ul>
         </div>
     </header>
-    <!-- Thong tin nguoi dung -->
-    <div class="header-user">
-        <div class="user-information">
-            <ul>
-                <img src="user_avatar.jpg" alt="Avatar">
-            </ul>
-            <a href="">Tên người dùng</a>
-            <button>Chỉnh sửa</button>
-        </div>
-        <div class="main-function">
-            <a href="">Bài viết</a>
-            <a href="">Thông tin cá nhân</a>
-            <a href="">Bạn bè</a>
-        </div>
-    </div>
-
+    <!-- Post -->
     <!-- Bai Post 1 -->
     <div class="post">
         <div class="post-header">
@@ -74,32 +59,8 @@
         </div>
     </div>
 
-    <!-- Bai Post 2 -->
     <div class="post">
-        <div class="post-header">
-            <div class="post-avatar">
-                <img src="user_avatar.jpg" alt="Ảnh đại diện người dùng">
-            </div>
-            <div class="post-details">
-                <span class="post-author">Tên người đăng</span>
-                <span class="post-time">2 giờ trước</span>
-            </div>
-        </div>
-        <div class="post-content">
-            <p>I've been in vietnam for over 2 weeks now and I've been really depressed about the racism I'm facing here. To give some context, I'm chinese and indian, quite dark skinned, female.
-                The counts of racism I've faced here is absolutely disheartening, maybe because of my background, I tend to notice the implicates of it. Other - I've been really well behaved, trying to break the misconceptions about my countrie(s) not because I deliberately want to, but because that's how I am. I'm introverted, am always polite, tip well, do not indulge in the bad stuff.</p>
-        </div>
-        <div class="post-actions">
-            <a href="#" class="post-like"><i class="fa-regular fa-thumbs-up"></i> Thích</a>
-            <a href="#" class="post-comment"><i class="fa-regular fa-comment"></i> Bình luận</a>
-        </div>
-        <div class="commentbox">
-            <textarea placeholder="Write a comment..."></textarea>
-        </div>
-    </div>
-
-    <!-- Bai Post 3 -->
-    <div class="post">
+        <!-- Bai Post 2 -->
         <div class="post-header">
             <div class="post-avatar">
                 <img src="user_avatar.jpg" alt="Ảnh đại diện người dùng">

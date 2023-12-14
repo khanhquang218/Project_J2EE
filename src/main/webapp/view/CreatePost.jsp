@@ -14,13 +14,25 @@
 </head>
 <body>
     <header>
-        <li><i class="fa-brands fa-reddit"></i><a href="">Reddit</a></li>
-        <li><button><i class="fa-solid fa-house"></i></button></li>
-        <li><input type="Tim Kiem"> <i class="fa-solid fa-magnifying-glass"></i></li>
-        <li><button><i class="fa-brands fa-rocketchat"></i></button></li>
-        <li><button><i class="fa-regular fa-bell"></i></button></li>
-        <li><button><i class="fa-solid fa-plus"></i></button></li>
-        <li><button><i class="fa-regular fa-user"></i></button></li>
+        <div class="header">
+            <ul>
+                <div class="icon-web">
+                    <li><a href=""><i class="fa-brands fa-reddit"></i>Reddit</a></li>
+                </div>
+                <div class="button-home">
+                    <li><button><i class="fa-solid fa-house"></i> Home</button></li>
+                </div>
+                <li><input type="Tim Kiem"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                <div class="button-function">
+                    <li><button><i class="fa-brands fa-rocketchat"></i></button></li>
+                    <li><button><i class="fa-regular fa-bell"></i></button></li>
+                    <li><button><i class="fa-solid fa-plus"></i></button></li>
+                </div>
+                <div class="button-user">
+                    <li><button><i class="fa-regular fa-user"></i> Tên người dùng</button></li>
+                </div>
+            </ul>
+        </div>
     </header>
     <form action="${pageContext.request.contextPath}/user/newPost/add" method="get">
         <header>

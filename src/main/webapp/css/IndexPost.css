@@ -106,14 +106,16 @@ header .fa-magnifying-glass:hover {
     color: #888;
 }
 
-/* /////////////////////Post///////////////// */
+/* Post */
 /* Kiểu dáng cho phần bài viết */
 .post {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    margin: 10px 400px 10px 400px;
-    padding: 10px;
+    width: 880px;
+    height: 300px;
+    margin: 0 300px 20px 300px;
+    background-color: #fff;
 }
 
 /* Phần header của bài viết */
@@ -167,28 +169,13 @@ header .fa-magnifying-glass:hover {
 
 /* Box Bình luận */
 .commentbox textarea {
-    width: 625px;
+    width: 860px;
     padding: 10px;
     margin: 5px 10px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 10px;
     resize: none;
-}
-
-/* User bình luận */
-.user-comment {
-    background-color: #ddd;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 10px;
-}
-
-.user-avatar-comment .comment-details {
-    display: flex;
-}
-
-.comment_content {
-    padding-left: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
 }
