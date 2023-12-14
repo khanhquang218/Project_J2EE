@@ -51,10 +51,11 @@ public class PostServices {
         return postModelList;
     }
     //trả về toàn bộ bài post của một người dùng bất kì bằng PostID
-    public List<PostModel> GetPostByPostID(int postID){
+    public PostModel GetPostByPostID(int postID){
         String query = String.format("select  * from post where PostID = %d ",postID);
         List<PostModel> postModelList = new ArrayList<>();
         var ResultOfCheckPost = CheckPostIsExists(postID);
+        PostModel postModel = new PostModel(0,null,null,null,null,null,null);
         if(ResultOfCheckPost == true){
             try{
                 Configura.CheckDrive();
@@ -71,16 +72,15 @@ public class PostServices {
                             resultSet.getDate("Modifed").toLocalDate(),
                             resultSet.getDate("LastModifedTime").toLocalDate()
                     );
-                    System.out.println("PostID: " + resultSet.getString("PostID"));
-                    System.out.println("UserID: " + resultSet.getString("UserID"));
-                    postModelList.add(post);
+                    postModel = post;
                 }
             }
             catch (SQLException exception){
                 exception.printStackTrace();
             }
+            return postModel;
         }
-        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
+        return  null;
     }
     //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
     public List<PostModel> GetPostOfUserID(String UserID){
