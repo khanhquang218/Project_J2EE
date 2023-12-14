@@ -44,7 +44,7 @@ body {
 }
 
 .button-home button:hover {
-    background-color: #888;
+    background-color: #FF4500;
 }
 
 .button-function {
@@ -64,7 +64,7 @@ body {
 }
 
 .button-function button:hover {
-    background-color: #888;
+    background-color: #FF4500;
 }
 
 .button-user button {
@@ -82,7 +82,7 @@ body {
 }
 
 .button-user button:hover {
-    background-color: #888;
+    background-color: #FF4500;
 }
 
 /* Kiểu dáng cho ô tìm kiếm */
@@ -103,7 +103,7 @@ header .fa-magnifying-glass {
 }
 
 header .fa-magnifying-glass:hover {
-    color: #888;
+    color: #FF4500;
 }
 
 /* /////////////////////Post///////////////// */
