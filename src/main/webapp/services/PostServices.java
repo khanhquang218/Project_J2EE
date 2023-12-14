@@ -50,6 +50,38 @@ public class PostServices {
         }
         return postModelList;
     }
+    //trả về toàn bộ bài post của một người dùng bất kì bằng PostID
+    public List<PostModel> GetPostByPostID(int postID){
+        String query = String.format("select  * from post where PostID = %d ",postID);
+        List<PostModel> postModelList = new ArrayList<>();
+        var ResultOfCheckPost = CheckPostIsExists(postID);
+        if(ResultOfCheckPost == true){
+            try{
+                Configura.CheckDrive();
+                Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    PostModel post = new PostModel(
+                            resultSet.getInt("PostID"),
+                            resultSet.getString("UserID"),
+                            resultSet.getString("Image"),
+                            resultSet.getString("Content"),
+                            resultSet.getDate("DatePost").toLocalDate(),
+                            resultSet.getDate("Modifed").toLocalDate(),
+                            resultSet.getDate("LastModifedTime").toLocalDate()
+                    );
+                    System.out.println("PostID: " + resultSet.getString("PostID"));
+                    System.out.println("UserID: " + resultSet.getString("UserID"));
+                    postModelList.add(post);
+                }
+            }
+            catch (SQLException exception){
+                exception.printStackTrace();
+            }
+        }
+        return postModelList; //dữ liệu chỉ mới chọn lọc và đưa về thành 1 dạng danh sách.
+    }
     //trả về toàn bộ bài post của một người dùng bất kì bằng UserID
     public List<PostModel> GetPostOfUserID(String UserID){
         String query = String.format("select  * from post where UserID = %s ",UserID);
