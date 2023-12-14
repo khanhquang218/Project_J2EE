@@ -121,7 +121,7 @@ header .fa-magnifying-glass:hover {
     margin: 0;
 }
 
-p {
+.reddit-post-form p {
     margin: 15px;
     padding: 1px 69px 1px 69px;
     display: inline-block;
@@ -150,7 +150,7 @@ p {
     border-bottom: 2px solid #fff;
 }
 
-button {
+.PostFunctionButton button {
     width: 70px;
     height: 30px;
     border-radius: 20px;
@@ -162,7 +162,7 @@ button {
     transition: all 0.4s ease;
 }
 
-button:hover {
+.PostFunctionButton button:hover {
     background-color: #FFFF99;
 }
 
