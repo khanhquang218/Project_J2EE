@@ -89,7 +89,7 @@
 
         <div class="user-gender">
             <div class="user-gender-detail">
-                <p>Nam</p>
+                <p>${user.gender}</p>
             </div>
             <div class="gender">
                 <p><i class="fa-solid fa-venus-mars"></i> Giới tính</p>
@@ -99,7 +99,7 @@
 
         <div class="user-address">
             <div class="user-address-detail">
-                <p>ABC</p>
+                <p>${user.address}</p>
             </div>
             <div class="address">
                 <p><i class="fa-solid fa-location-dot"></i> Địa chỉ</p>
