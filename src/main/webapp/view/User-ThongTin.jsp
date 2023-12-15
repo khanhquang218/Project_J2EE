@@ -79,7 +79,7 @@
 
         <div class="user-dayofbirth">
             <div class="user-dayofbirth-detail">
-                
+               <p>${user.dayOfBirth}</p>
             </div>
             <div class="dayofbirth">
                 <p><i class="fa-solid fa-cake-candles"></i> Ngày sinh</p>
