@@ -62,33 +62,34 @@
             </div>
         </div>
          <c:set var="user" value="${resultUser}"/>
-                <c:forEach var="post" items="${listpost}">
-                    <!-- Bai Post 1 -->
-                    <div class="post">
-                        <div class="post-header">
-                            <div class="post-avatar">
-                                <img src="user_avatar.jpg" alt="Ảnh đại diện người dùng">
-                            </div>
+         <c:forEach var="post" items="${listpost}">
+             <!-- Bai Post 1 -->
+             <div class="post">
+                 <div class="post-header">
+                     <div class="post-avatar">
+                         <img src="user_avatar.jpg" alt="Ảnh đại diện người dùng">
+                     </div>
 
-                            <div class="post-details">
-                                <span class="post-author"><p>${user.userAccount}</p></span>
-                                <span class="post-time">2 giờ trước</span>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            <p>${post.content}</p>
-                        </div>
-                        <div class="post-actions">
-                            <a href="#" class="post-like"><i
-                                    class="fa-regular fa-thumbs-up"></i> Thích</a>
-                            <a href="#" class="post-comment"><i
-                                    class="fa-regular fa-comment"></i> Bình luận</a>
-                        </div>
-                        <div class="commentbox">
-                            <textarea placeholder="Write a comment..."></textarea>
-                        </div>
-                    </div>
-                </c:forEach>
+                     <div class="post-details">
+                         <span class="post-author"><p>${user.userAccount}</p></span>
+                         <span class="post-time">${post.datePost}</span>
+                     </div>
+                 </div>
+                 <div class="post-content">
+                     <p>${post.content}</p>
+                 </div>
+                 <div class="post-actions">
+                     <a href="#" class="post-like"><i
+                             class="fa-regular fa-thumbs-up"></i> Thích</a>
+                     <a href="#" class="post-comment"><i
+                             class="fa-regular fa-comment"></i> Bình luận</a>
+                 </div>
+                 <div class="commentbox">
+                     <textarea placeholder="Write a comment..."></textarea>
+                 </div>
+             </div>
+         </c:forEach>
+
 
     </body>
 </html>
