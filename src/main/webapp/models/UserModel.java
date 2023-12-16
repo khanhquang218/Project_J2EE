@@ -9,22 +9,43 @@ public class UserModel {
     public String Email;
     public String Phone;
     public String UserAccount;
-    public LocalDate DayOfBirth;
+    public String Pass;
+    public LocalDate Dayofbirth;
     public String Gender;
     public String Address;
-//    public String Images;
+
+    //    public String Images;
     public UserModel(String userID, String firstName, String lastName, String email,
-                     String phone, String userAccount, LocalDate dayOfBirth, String gender, String address){
+                     String phone, String userAccount, String pass, LocalDate dayofbirth, String gender,
+                     String address){
         this.UserID = userID;
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;
         this.Phone = phone;
         this.UserAccount = userAccount;
-        this.DayOfBirth = dayOfBirth;
+        this.Pass = pass;
+        this.Dayofbirth = dayofbirth;
         this.Gender = gender;
         this.Address = address;
 
+    }
+
+
+    public String getPass() {
+        return Pass;
+    }
+
+    public void setPass(String pass) {
+        Pass = pass;
+    }
+
+    public LocalDate getDayofbirth() {
+        return Dayofbirth;
+    }
+
+    public void setDayofbirth(LocalDate dayofbirth) {
+        Dayofbirth = dayofbirth;
     }
 
     public String getUserID() {
@@ -51,10 +72,6 @@ public class UserModel {
         return UserAccount;
     }
 
-    public LocalDate getDayOfBirth() {
-        return DayOfBirth;
-    }
-
     public String getGender() {
         return Gender;
     }
@@ -69,10 +86,6 @@ public class UserModel {
 
     public void setAddress(String address) {
         Address = address;
-    }
-
-    public void setDayOfBirth(LocalDate dayOfBirth) {
-        DayOfBirth = dayOfBirth;
     }
 
     public void setEmail(String email) {

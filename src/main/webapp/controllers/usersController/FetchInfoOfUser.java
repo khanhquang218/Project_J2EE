@@ -23,7 +23,6 @@ public class FetchInfoOfUser extends HttpServlet {
         System.out.println(resultOfGetInfoUser.Email);
         System.out.println(resultOfGetInfoUser.Phone);
         System.out.println(resultOfGetInfoUser.UserAccount);
-        System.out.println(resultOfGetInfoUser.DayOfBirth);
         System.out.println(resultOfGetInfoUser.Gender);
         System.out.println(resultOfGetInfoUser.Address);
         req.setAttribute("resultOfGetInfoUser",resultOfGetInfoUser);

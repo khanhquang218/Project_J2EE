@@ -3,6 +3,7 @@ package services;
 import models.UserModel;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 */
 public class UserServices {
     private static final Configura configura = new Configura();
+    public int rowsInserted = 0;
     //lấy toàn bộ thông tin người dùng có trong database
     public List<UserModel> GetAllUsers() {
         String query = "select * from person";
@@ -33,6 +35,7 @@ public class UserServices {
                         resultSet.getString("Email"),
                         resultSet.getString("Phone"),
                         resultSet.getString("UserAccount"),
+                        resultSet.getString("Pass"),
                         resultSet.getDate("DayOfBirth").toLocalDate(),
                         resultSet.getString("Gender"),
                         resultSet.getString("Address")
@@ -49,7 +52,7 @@ public class UserServices {
     public UserModel FetchUserModelByUserID(String UserID){
         String query = String.format("select  * from person where UserID = '%s' ",UserID);
         UserModel userResult = new UserModel(null, null, null, null, null,
-                null, null, null, null);
+                null, null, null, null, null);
         var resultOfCheckUserIsExists = CheckUserIsExists(UserID);
         if (resultOfCheckUserIsExists){
             try{
@@ -65,6 +68,7 @@ public class UserServices {
                             resultSet.getString("Email"),
                             resultSet.getString("Phone"),
                             resultSet.getString("UserAccount"),
+                            resultSet.getString("Pass"),
                             resultSet.getDate("DayOfBirth").toLocalDate(),
                             resultSet.getString("Gender"),
                             resultSet.getString("Address")
@@ -99,6 +103,7 @@ public class UserServices {
                             resultSet.getString("Email"),
                             resultSet.getString("Phone"),
                             resultSet.getString("UserAccount"),
+                            resultSet.getString("Pass"),
                             resultSet.getDate("DayOfBirth").toLocalDate(),
                             resultSet.getString("Gender"),
                             resultSet.getString("Address")
@@ -147,5 +152,81 @@ public class UserServices {
         }
         return false;
     }
-    //
+    //Dang nhap
+    public UserModel login(String UserAccount, String Pass){
+        String query = "SELECT * FROM person WHERE UserAccount = ? AND Pass = ?";
+        try{
+            Configura.CheckDrive();
+            Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, UserAccount);
+            preparedStatement.setString(2, Pass);
+            ResultSet resultSet = preparedStatement.executeQuery(query);
+            if(resultSet.next()){
+                return  new UserModel(
+                        resultSet.getString("UserID"),
+                        resultSet.getString("Firstname"),
+                        resultSet.getString("Lastname"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("UserAccount"),
+                        resultSet.getString("Pass"),
+                        resultSet.getDate("DayOfBirth").toLocalDate(),
+                        resultSet.getString("Gender"),
+                        resultSet.getString("Address")
+                );
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return null;
+    }
+    //Dang ki
+    public boolean CreateAccount(UserModel newAccount) {
+        try {
+            String query = "INSERT INTO person (UserID, UserAccount, Pass, Firstname, Lastname, Email, Phone, " +
+                    "Dayofbirth, " +
+                    " " +
+                    "Gender, " +
+                    "Address)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            Configura.CheckDrive();
+            Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newAccount.UserID);
+            preparedStatement.setString(2, newAccount.UserAccount);
+            preparedStatement.setString(3, newAccount.Pass);
+            preparedStatement.setString(4, newAccount.FirstName);
+            preparedStatement.setString(5, newAccount.LastName);
+            preparedStatement.setString(6, newAccount.Email);
+            preparedStatement.setString(7, newAccount.Phone);
+            preparedStatement.setString(8, String.valueOf(newAccount.Dayofbirth));
+            preparedStatement.setString(8, newAccount.Gender);
+            preparedStatement.setString(9, newAccount.Address);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true; // Return null if no user found
+    }
+
+//    public String getID(String UserAccount) {
+//        try {
+//            String query = "SELECT * FROM person WHERE  UserAccount = ?";
+//            Configura.CheckDrive();
+//            Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
+//            PreparedStatement preparedStatement = connection.prepareStatement(query);
+//            preparedStatement.setString(1, UserAccount);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            if (resultSet.next()) {
+//                // User exists, create and return a NguoiDung object
+//                return resultSet.getString("UserID");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }
