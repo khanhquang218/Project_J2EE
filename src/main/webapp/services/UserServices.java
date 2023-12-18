@@ -154,62 +154,62 @@ public class UserServices {
     }
     //Dang nhap
     public UserModel login(String UserAccount, String Pass){
-        String query = "SELECT * FROM person WHERE UserAccount = ? AND Pass = ?";
+//        String query = "SELECT * FROM person WHERE UserAccount = ? AND Pass = ?";
+        String query = String.format("SELECT * FROM person WHERE UserAccount = '%s' AND Pass = '%s'", UserAccount,
+                Pass);
+        UserModel userModel = new UserModel(null, null, null, null, null, null,null,null,null, null);
         try{
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, UserAccount);
-            preparedStatement.setString(2, Pass);
-            ResultSet resultSet = preparedStatement.executeQuery(query);
-            if(resultSet.next()){
-                return  new UserModel(
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                UserModel  userModel1 = new UserModel(
                         resultSet.getString("UserID"),
                         resultSet.getString("Firstname"),
                         resultSet.getString("Lastname"),
                         resultSet.getString("Email"),
                         resultSet.getString("Phone"),
-                        resultSet.getString("UserAccount"),
+                        resultSet.getString("userAccount"),
                         resultSet.getString("Pass"),
-                        resultSet.getDate("DayOfBirth").toLocalDate(),
+                        resultSet.getDate("Dayofbirth").toLocalDate(),
                         resultSet.getString("Gender"),
                         resultSet.getString("Address")
-                );
+                        );
+                        userModel = userModel1;
             }
+            return userModel;
         } catch (Exception exception){
             exception.printStackTrace();
         }
-        return null;
+        return userModel;
     }
     //Dang ki
     public boolean CreateAccount(UserModel newAccount) {
         try {
-            String query = "INSERT INTO person (UserID, UserAccount, Pass, Firstname, Lastname, Email, Phone, " +
-                    "Dayofbirth, " +
-                    " " +
-                    "Gender, " +
-                    "Address)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO person(UserID, FirstName, LastName, Email, Phone, UserAccount, Pass, " +
+                    "DayOfbirth, Gender, Address) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Configura.CheckDrive();
             Connection connection = DriverManager.getConnection(configura.JDBC_URL, configura.JDBC_USER, configura.JDBC_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, newAccount.UserID);
-            preparedStatement.setString(2, newAccount.UserAccount);
-            preparedStatement.setString(3, newAccount.Pass);
-            preparedStatement.setString(4, newAccount.FirstName);
-            preparedStatement.setString(5, newAccount.LastName);
-            preparedStatement.setString(6, newAccount.Email);
-            preparedStatement.setString(7, newAccount.Phone);
+            preparedStatement.setString(2, newAccount.FirstName);
+            preparedStatement.setString(3, newAccount.LastName);
+            preparedStatement.setString(4, newAccount.Email);
+            preparedStatement.setString(5, newAccount.Phone);
+            preparedStatement.setString(6, newAccount.UserAccount);
+            preparedStatement.setString(7, newAccount.Pass);
             preparedStatement.setString(8, String.valueOf(newAccount.Dayofbirth));
-            preparedStatement.setString(8, newAccount.Gender);
-            preparedStatement.setString(9, newAccount.Address);
+            preparedStatement.setString(9, newAccount.Gender);
+            preparedStatement.setString(10, newAccount.Address);
             preparedStatement.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true; // Return null if no user found
+        return false; // Return null if no user found
     }
 
 //    public String getID(String UserAccount) {

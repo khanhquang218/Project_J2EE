@@ -19,6 +19,6 @@ public class FetchListUserByUserName extends HttpServlet {
         var resultOfListUserByUserName = userServices.FetchUserModelByUserName("aaaa");
         System.out.println(resultOfListUserByUserName);
         req.setAttribute("resultOfListUserByUserName",resultOfListUserByUserName);
-        req.getRequestDispatcher("/view/hoome.jsp");
+        req.getRequestDispatcher("/view/home.jsp");
     }
 }
