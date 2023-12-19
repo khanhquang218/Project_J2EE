@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;500&family=Roboto:wght@100;300;400&family=Ubuntu&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/CreatePost.css" />
-    <title>J2EE - Tạo Bài Post</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/SearchFailed.css" />
+    <title>J2EE - Tim Kiem</title>
 </head>
 <body>
     <header>
@@ -34,27 +34,11 @@
             </ul>
         </div>
     </header>
-    <form action="${pageContext.request.contextPath}/user/newPost/add" method="get">
-        <header>
-            <!-- Các thẻ header -->
-        </header>
-        <div class="reddit-post-form">
-            <ul>
-                <div class="PostButton">
-                    <p><i class="fas fa-bars"></i> Post</p>
-                    <p><i class="fas fa-image"></i> Image</p>
-                </div>
-
-                <div class="PostText">
-                    <ion-icon name="Text-outline"></ion-icon>
-                    <textarea id="text-post" name="text-post" placeholder="Enter text post"></textarea>
-                </div>
-
-                <div class="PostFunctionButton">
-                    <button class="post-btn" type="submit">Post</button>
-                </div>
-            </ul>
+    
+    <div class="search-list">
+        <div class="search-list-title">
+            <p>No Search Found Or Directory</p>
         </div>
-    </form>
+    </div>
 </body>
 </html>

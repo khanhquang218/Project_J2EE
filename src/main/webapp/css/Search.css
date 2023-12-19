@@ -106,69 +106,67 @@ header .fa-magnifying-glass:hover {
     color: #FF4500;
 }
 
-/* CreatePost */
-.reddit-post-form {
-    border: 1px solid #c0c0c0;
-    border-radius: 10px ;
-    margin-left: 300px;
-    margin-top: 20px;
-    width: 740px;
-    height: 425px;
+/* Tim Kiem */
+.search-list {
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
     background-color: #fff;
-}
-
-.PostButton{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #c0c0c0;
-}
-.PostButton p {
-    display: inline;
-    border-left: 1px solid #c0c0c0;
-    font-size: 20px;
-    padding: 15px 150px 15px 150px;
-    cursor: pointer;
-}
-
-.PostButton p:hover {
-    color: #FF4500;
-}
-
-.PostText textarea {
-    font-family: 'Times New Roman', Times, serif;
-    width: 714px;
-    margin: 10px 0 5px 0;
-    padding: 8px 12px;
-    border: 1px solid #c0c0c0;
-    border-radius: 4px;
-    font-size: 1em;
-    color: #333;
-}
-
-.PostText textarea {
-    height: 280px;
-    margin-top: 5px ;
-    border-bottom: 2px solid #c0c0c0;
-}
-
-.PostFunctionButton {
-    margin-left: 600px;
+    width: 600px;
+    height: 670px;
+    margin-left: 355px;
     margin-top: 10px;
 }
 
-.PostFunctionButton button {
-    width: 70px;
+.search-list-title {
+    margin: 10px 0 10px 20px;
+    font-size: 18px;
+}
+
+.search {
+    border-bottom: 1px solid #C0C0C0;
+    width: 580px;
+    height: 100px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search img {
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 1px solid black;
+    width: 80px;
+    height: 50px;
+    padding-left: 20px;
+    padding-top: 30px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.search a {
+    text-decoration: none;
+    color: black;
+    margin-top: 40px;
+    margin-inline-end: 290px;
+}
+
+.search a:hover {
+    color: #888888;
+}
+
+.search button {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #FF4500;
     height: 30px;
-    border-radius: 15px;
-    border: none;
-    outline: none;
-    background-color: #E4E6EB;
-    cursor: pointer;
+    max-width: 100px;
+    margin-top: 35px;
     font-size: 1rem;
-    font-weight: 600;
+    cursor: pointer;
     transition: all 0.4s ease;
 }
 
-.PostFunctionButton button:hover{
-    background-color: #FF4500;
+.search button:hover {
+    color: #fff;
 }
