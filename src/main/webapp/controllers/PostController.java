@@ -1,4 +1,4 @@
-package controllers.postsController;
+package controllers;
 
 import services.PostServices;
 
@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet({"/posts/admin/allPost/"})
-public class FetchAllPost extends HttpServlet {
-    private PostServices postServices = new PostServices();
+@WebServlet("/posts/")
+public class PostController extends HttpServlet {
 
+    private static PostServices postServices = new PostServices();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.doGet(req, resp);
-        var resultOfAllPost = postServices.GetAllPosts();
-        System.out.printf(resultOfAllPost.toString());
-        req.setAttribute("resultOfAllPost",resultOfAllPost);
-        req.getRequestDispatcher("/view/home.jsp");
+        var postList = postServices.FetchListPostOfFriend("1");
+        req.setAttribute("postList", postList);
+        req.getRequestDispatcher("/views/Home.jsp").forward(req, resp);
     }
 }
