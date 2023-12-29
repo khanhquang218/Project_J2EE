@@ -35,11 +35,8 @@ public class AddPost extends HttpServlet {
         var content = req.getParameter("content");
         var image = req.getParameter("image");
         PostModel newPostModel = new PostModel(postID, userID, content, image, LocalDate.now(),LocalDate.now(),LocalDate.now());
-        var resultOfCreate = postServices.CreateNewPost(newPostModel);
-        if(resultOfCreate){
-            req.getRequestDispatcher("views/Home.jsp").forward(req, resp);
-        }
-        req.getRequestDispatcher("views/Home.jsp").forward(req, resp);
+        var result = postServices.CreateNewPost(newPostModel);
+        System.out.println(result);
     }
     private int PostOfLength(){
         return postServices.GetAllPosts().size();
