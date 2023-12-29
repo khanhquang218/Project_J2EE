@@ -6,7 +6,7 @@
   </head>
   <body>
    <h1><td>Add Post</td></h1>
-   <form action="/createPost/add" method="get">
+   <form action="/project/form-add-post" method="post">
       <p>User ID: <input type="text" name="userID"></p>
       <p>Image: <input type="text" name="image"></p>
       <p>Content: <input type="text" name="content"></p>
