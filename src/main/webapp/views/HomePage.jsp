@@ -2,10 +2,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
   <head>
-    <title>Post Details</title>
+    <title>Post</title>
   </head>
   <body>
-    <h2>Post Details</h2>
+    <h2>Post List</h2>
+    <form action = '/project/form-add-post' method = "get">
+      <input type = "submit" value = "Add Post"/>
+    </form>
     <table border="1">
       <tr>
         <th>Post ID</th>
@@ -27,7 +30,6 @@
           <td>${postList.lastModifiedTime}</td>
         </tr>
       </c:forEach>
-
     </table>
   </body>
 </html>
